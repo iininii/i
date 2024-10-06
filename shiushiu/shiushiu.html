@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>咻咻性別揭曉</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="spinner-wrap">
+                <div class="spinner"></div>
+                <img src="images/img_star.webp">    
+            </div>   
+        </div>
+    </div> 
+
+    <div class="wrap">
+        <div class="container">
+
+            <div class="carousel">
+                <div class="carousel-images fromRight">
+                    <img src="images/img_meq.webp" alt="">
+                    <img src="images/img_meq.webp" alt="">
+                </div>
+            </div>
+            
+            <div class="titleBox">
+                <img src="images/img_girl.webp" class="titleGirl">
+                <img src="images/img_boy.webp" class="titleBoy">
+                <img src="images/img_or.webp" class="titleOr">
+                <img src="images/img_shiu.webp" class="titleShiu">
+                <ul class="titleDeco">
+                    <li class="star"></li>
+                    <li class="star"></li>
+                    <li class="dot"></li>
+                    <li class="dot"></li>
+                    <li class="dot"></li>
+                    <li class="star"></li>
+                    <li class="dot"></li>
+                </ul>
+            </div>
+
+            <div class="carousel">
+                <div class="carousel-images fromLeft">
+                    <img src="images/img_meq.webp" alt="">
+                    <img src="images/img_meq.webp" alt="">
+                </div>
+            </div>
+
+            <!-- 留言顯示區域 -->
+            <div class="candyBoxWrap">
+                <ul id="candyBox"></ul>
+            </div>
+
+
+            <div class="btn-normal" id="joinButton"><div></div></div>
+            <div id="countdown"></div>
+            
+            <div id="revealButton"><div></div></div>
+
+
+            <img src="images/img_content.webp" class="text">
+
+            <div class="footer">© 2024 Nini & Rico</div>
+
+        </div>
+    </div>
+
+    <!-- 留言彈窗 -->
+    <div class="popup popup-form">
+        <div class="popup-content">
+            <a href="javascript:;" class="pop-close"></a>
+            
+            <div id="formBox">
+                <p class="tt">每個人只能留言一次哦!!<br>送出後你的糖果球就會在畫面上囉</p>
+                
+                <form id="commentForm">
+                    <div class="form-control form-gender">
+                        <label class="form-title">猜咻咻是</label>
+                        <div class="form-con">
+                            <input type="radio" id="female" name="gender" value="Girl" required>
+                            <label for="female" class="btnGender">♀ 女生</label>
+                            <input type="radio" id="male" name="gender" value="Boy" required>
+                            <label for="male" class="btnGender">♂ 男生</label>
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label class="form-title" for="name">你的暱稱</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="form-title" for="message">留言給我們</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="form-control">
+                        <label class="form-title" for="bet">下注金額 <span>(猜中也不會有獎金哦)</span></label>
+                        <input type="text" id="bet" name="bet">
+                    </div>
+                    <button type="submit" id="btn-send"><div></div></button>
+                </form>
+            </div>
+
+            <div id="formResult">
+                <p class="tt" id="status"></p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 結果彈窗 -->
+    <div class="popup popup-result" id="popup-result">
+        <div class="popup-content">
+            <div id="genderReveal" class="hidden">
+                <h2 id="genderText"></h2>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        
+
+    </script>
+
+    <script>
+        
+    </script>
+</body>
+</html>

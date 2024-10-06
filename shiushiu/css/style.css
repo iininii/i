@@ -1,0 +1,609 @@
+@import"https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+
+html, body {
+    min-height: 100%;
+    width: 100%;
+}
+
+body {
+    background: #CAB0FE url(../images/bg.webp) center center no-repeat;
+    background-size: cover;
+}
+
+.wrap {
+    width: 100%;
+    padding-top: 8%;
+}
+
+.container {
+    text-align: center;
+}
+
+
+/*------------ 標題 START -------------*/
+/*------------ 標題 START -------------*/
+
+    .titleBox {
+        width: 94%;
+        padding-bottom: 73%;
+        position: relative;
+        margin: 0 auto -4%;
+    }
+
+    .titleBox > img {
+        position: absolute;
+    }
+
+    .titleBox .titleGirl {
+        width: 60%;
+        left: 0;
+        top: 0;
+    }
+
+    .titleBox .titleBoy {
+        width: 65%;
+        right: 0;
+        bottom: 0;
+    }
+
+    .titleBox .titleShiu {
+        width: 27%;
+        right: 7%;
+        top: 17%;
+    }
+
+    .titleBox .titleOr {
+        width: 30%;
+        left: 5%;
+        bottom: 4%;
+    }
+
+    .titleDeco {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+    .titleDeco li.star {
+        background: url('../images/img_star.webp') no-repeat center center / 100%;
+    }
+    .titleDeco li.dot {
+        background-color: #fff;
+        border-radius: 100px;
+    }
+    .titleDeco li {
+        position: absolute;
+        list-style-type: none;
+        animation: shine 1s linear infinite alternate;
+    }
+    .titleDeco li:nth-child(1) {
+        width: 4%;
+        padding-bottom: 4%;
+        right: 13%;
+        top: 5%;
+        animation-delay: 0.1s;
+    }
+    .titleDeco li:nth-child(2) {
+        width: 4%;
+        padding-bottom: 4%;
+        left: 1%;
+        bottom: 10%;
+    }
+    .titleDeco li:nth-child(3) {
+        width: 2.4%;
+        padding-bottom: 2.4%;
+        left: 13%;
+        top: 3%;
+        animation-delay: 0.2s;
+    }
+    .titleDeco li:nth-child(4) {
+        width: 1.6%;
+        padding-bottom: 1.6%;
+        right: 25%;
+        top: -17%;
+    }
+    .titleDeco li:nth-child(5) {
+        width: 2%;
+        padding-bottom: 2%;
+        right: 1.6%;
+        bottom: 18%;
+        animation-delay: 0.1s;
+    }
+    .titleDeco li:nth-child(6) {
+        width: 4%;
+        padding-bottom: 4%;
+        right: 13%;
+        bottom: -15%;
+    }
+    .titleDeco li:nth-child(7) {
+        width: 2%;
+        padding-bottom: 2%;
+        left: 16%;
+        bottom: -10%;
+        animation-delay: 0.3s;
+    }
+    @keyframes shine {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+/*------------ 標題 END -------------*/
+/*------------ 標題 END -------------*/
+
+
+/*------------ 跑馬燈 START -------------*/
+/*------------ 跑馬燈 START -------------*/
+
+    /* 跑馬燈容器樣式 */
+    .carousel {
+        width: 90%;  /* 容器寬度 */
+        overflow: hidden;  /* 隱藏超出的部分 */
+        position: relative;
+        margin: 0 auto;
+    }
+
+    /* 圖片滾動區域樣式 */
+    .carousel-images {
+        display: flex;
+        white-space: nowrap;
+    }
+
+    .carousel-images.fromRight {
+        animation: carouselScrollFromRight 4s linear infinite alternate; /* 設置滾動動畫 */
+    }
+
+    .carousel-images.fromLeft {
+        animation: carouselScrollFromLeft 4s linear infinite alternate; /* 設置滾動動畫 */
+    }
+
+    /* 單張圖片樣式 */
+    .carousel-images img {
+        width: 100%;  /* 設置圖片寬度以適應容器 */
+        max-width: 100%;
+        margin-right: 8%;
+    }
+
+    /* 滾動動畫 */
+    @keyframes carouselScrollFromRight {
+        0% {
+            transform: translateX(0);  /* 從初始位置開始 */
+        }
+        100% {
+            transform: translateX(-100%);  /* 滾動到整個寬度 */
+        }
+    }
+    @keyframes carouselScrollFromLeft {
+        0% {
+            transform: translateX(-100%);  /* 從初始位置開始 */
+        }
+        100% {
+            transform: translateX(0);  /* 滾動到整個寬度 */
+        }
+    }
+/*------------ 跑馬燈 END -------------*/
+/*------------ 跑馬燈 END -------------*/
+
+
+
+/*------------ 糖果區 START -------------*/
+/*------------ 糖果區 START -------------*/
+    .candyBoxWrap {
+        overflow-y: auto;
+        
+    }
+    @keyframes candyBoxScrollFromRight {
+        0% {
+            transform: translateX(0);  /* 從初始位置開始 */
+        }
+        100% {
+            transform: translateX(-70%);  /* 滾動到整個寬度 */
+        }
+    }
+    #candyBox {
+        width: max-content;
+        height: 220px;
+        margin: 20px auto;
+        padding: 0 50px;
+        display: flex;
+        white-space: nowrap;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+/*         animation: candyBoxScrollFromRight 10s linear infinite alternate; */
+        
+    }
+
+    #candyBox li {
+        list-style-type: none;
+        display: inline-block;
+        width: 100px;
+        margin:  0.5%;
+        animation: candyBoxScrollFromRight 10s linear infinite alternate;
+    }
+    #candyBox li.Girl .itemInner {
+        background: url('../images/img_candy-girl.webp') center center no-repeat;
+        background-size: contain;
+        text-shadow: 0 0 8px #cb0057;
+    }
+    #candyBox li.Boy .itemInner {
+        background: url('../images/img_candy-boy.webp') center center no-repeat;
+        background-size: contain;
+        text-shadow: 0 0 8px #0064c0;
+    }
+    #candyBox li .itemInner {
+        display: block;
+        width: 100%;
+        padding-bottom: 100%;
+        position: relative;
+        font-size: 100%;
+        color: #fff;
+        font-weight: bold;
+    }
+    #candyBox li span {
+        position: absolute;
+/*         font-size: 1em; */
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-50%) rotate(-15deg);
+    }
+
+    ::-webkit-scrollbar {
+
+      width: 0;
+      height: 0;
+
+    }
+
+    ::-webkit-scrollbar-button {
+
+      background: transparent;
+
+      border-radius: 4px;
+
+    }
+
+    ::-webkit-scrollbar-track-piece {
+
+      background: transparent;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+
+      border-radius: 4px;
+
+      background-color: rgba(0, 0, 0, 0.4);
+
+      border: 1px solid slategrey;
+
+    }
+
+    ::-webkit-scrollbar-track {
+
+      box-shadow: transparent;
+
+    }
+/*------------ 糖果區 END -------------*/
+/*------------ 糖果區 END -------------*/
+
+.footer {
+    font-size: 12px;
+    color: #9270a7;
+    margin: 30px auto;
+}
+
+.text {
+    width: 82%;
+    margin: 0 auto;
+}
+
+.btn-normal {
+    width: 200px;
+    margin: 3% auto;
+    display: none;
+}
+.btn-normal:active {
+    transform: scale(0.95);
+}
+.btn-normal div {
+    background: url('../images/btn_go.webp') no-repeat;
+    background-size: 100%;
+    width: 100%;
+    padding-bottom: 29%;
+}
+
+#revealButton {
+    width: 200px;
+    margin: 3% auto 30px;
+    display: none;
+}
+#revealButton:active {
+    transform: scale(0.95);
+}
+#revealButton div {
+    background: url('../images/btn_answer.webp') no-repeat;
+    background-size: 100%;
+    width: 100%;
+    padding-bottom: 29%;
+}
+
+#countdown {
+    font-size: 18px;
+    color: #553B5B;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+
+#genderReveal {
+    margin-top: 30px;
+}
+
+.hidden {
+    display: none;
+}
+
+#genderText {
+    font-size: 30px;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+#genderText img {
+    width: 100%;
+}
+
+
+
+/*-------------------- Popup  --------------------*/
+.popup{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 20;
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+/*使視窗置中*/
+.popup:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.05em;
+}
+.popup-content {
+  max-width: 90%;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  z-index: 3;
+  padding: 0;
+  margin: 30px auto;
+  width: 560px;
+  position: relative;
+  color: #553B5B;
+}
+.pop-close {
+  background-image: url('../images/img_close.svg');
+  background-position: center bottom;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  width: 8%;
+  padding-bottom: 8%;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  z-index: 5;
+  cursor: pointer;
+}
+.pop-close:active {
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+#formResult {
+    text-align: center;
+}
+.popup-form .tt {
+    margin: 20px auto;
+}
+
+.popup-form .popup-content {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.popup-form #btn-send {
+    width: 200px;
+    margin: 25px auto 10px;
+    border: none;
+    display: block;
+    background-color: transparent;
+}
+.popup-form #btn-send:active {
+    transform: scale(0.95);
+}
+.popup-form #btn-send div {
+    background: url('../images/btn_send_1.webp') no-repeat;
+    background-size: 100%;
+    width: 100%;
+    padding-bottom: 29%;
+}
+.popup-form #btn-send[disabled] div {
+    background-position: center bottom;
+    opacity: 0.8;
+}
+.popup-form #btn-send[disabled]:active {
+    transform: scale(1);
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+.form-control .form-title {
+    margin-bottom: 5px;
+    display: block;
+}
+.form-control .form-title span {
+    font-size: 0.75em;
+}
+
+.form-control.form-gender {
+    text-align: center;
+    background-color: #ecdaf1;
+    border-radius: 5px;
+    padding: 20px 10px;
+}
+.form-control.form-gender input[type="radio"] {
+    display: none;
+}
+.form-control.form-gender input[type="radio"] + label[for="male"] {
+    text-shadow: 0 0 8px #0064c0;
+    background: url('../images/img_candy-boy.webp') center center no-repeat;
+    background-size: contain;
+}
+.form-control.form-gender input[type="radio"] + label[for="female"] {
+    text-shadow: 0 0 8px #cb0057;
+    background: url('../images/img_candy-girl.webp') center center no-repeat;
+    background-size: contain;
+}
+.form-control.form-gender input[type="radio"]:checked + label {
+    box-shadow: 0 0 10px #ffe94a, 0 0 5px #b49e00, inset 0 0 15px #ffe844;
+}
+.form-control.form-gender label.btnGender {
+    display: inline-block;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-shadow: 0 0 2px #000;
+    text-align: center;
+    border-radius: 100px;
+    margin: 0 15px;
+}
+
+input[type="text"] {
+    background-color: #F8F2F9;
+    border: 1px solid #B395BA;
+    border-radius: 5px;
+    height: 52px;
+    width: 100%;
+    padding: 0 10px;
+    font-size: 18px;
+}
+textarea {
+    background-color: #F8F2F9;
+    border: 1px solid #B395BA;
+    border-radius: 5px;
+    height: 130px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    background-color: #F8F2F9;
+    border: 1px solid transparent;
+    outline: 3px solid #ffe94a;
+}
+
+
+/*------------- loading --------------*/
+.preloader {
+  position: fixed;
+  z-index: 999999999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #553B5B;
+}
+.preloader .preloader-inner {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+.preloader .spinner-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.preloader .spinner {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #897958;
+  border-top-color: #FDF2A0;
+  border-radius: 50%;
+  animation: loader-rotate 1s linear infinite;
+  margin: auto;
+}
+.preloader .preloader-text {
+  color:  #fff;
+  margin: auto;
+  text-align: center;
+  padding: 0 10%;
+}
+.preloader img { 
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 30%;
+}
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0); }
+  100% {
+    transform: rotate(360deg); } 
+}
+
+
+
+
+
+
+
+
+
+
+
