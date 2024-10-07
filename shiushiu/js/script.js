@@ -64,8 +64,8 @@ form.addEventListener('submit', function(e) {
 
             // 隨機大小
             const randomNum = (Math.floor(Math.random() * 20) + 8);
-            listItem.style.width = randomNum + 'vw';
-            listItem.style.fontSize = randomNum/5 + 'vw';
+            listItem.style.width = randomNum + 'em';
+            nameSpan.style.fontSize = randomNum/5 + 'em';
             
              // 顯示姓名
             nameSpan.textContent = `${name}`;
@@ -96,7 +96,10 @@ function fetchMessages() {
     fetch(shiuFormScriptURL)
         .then(response => response.json())   // 解析為 JSON 格式
         .then(data => {
-            data.reverse().forEach(entry => {
+
+            data.sort(() => Math.random() - 0.5);
+            
+            data.forEach(entry => {
 
                 // 創建 <li> 元素
                 const listItem = document.createElement('li');
@@ -109,9 +112,9 @@ function fetchMessages() {
                 nameSpan.className = 'post-name';
 
                 // 隨機大小
-                const randomNum = (Math.floor(Math.random() * 20) + 8);
-                listItem.style.width = randomNum + 'vw';
-                listItem.style.fontSize = randomNum/5 + 'vw';
+                const randomNum = (Math.floor(Math.random() * 15) + 8);
+                listItem.style.width = randomNum + 'em';
+                nameSpan.style.fontSize = randomNum/5 + 'em';
                 
                  // 顯示姓名
                 nameSpan.textContent = `${entry.姓名}`;
