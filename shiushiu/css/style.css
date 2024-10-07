@@ -11,13 +11,15 @@
 html, body {
     min-height: 100%;
     width: 100%;
-    max-width: 768px;
     margin: 0 auto;
+    max-width: 768px;
+    
 }
 
 body {
     background: #CAB0FE url(../images/bg.webp) center center no-repeat;
     background-size: cover;
+    font-size: 62.5%;
 }
 
 .wrap {
@@ -226,8 +228,16 @@ body {
         justify-content: center;
         align-items: center;
         align-content: center;
-/*         animation: candyBoxScrollFromRight 10s linear infinite alternate; */
-        
+    }
+    @media (min-width: 769px) {
+        #candyBox {
+            font-size: 0.75em;
+        }
+    }
+    @media (max-width: 768px) {
+        #candyBox {
+            font-size: 1.5vw;
+        }
     }
 
     #candyBox li {
