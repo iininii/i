@@ -97,8 +97,8 @@ function fetchMessages() {
         .then(response => response.json())   // 解析為 JSON 格式
         .then(data => {
 
+            ///////// 顯示球球 /////////
             data.sort(() => Math.random() - 0.5);
-            
             data.forEach(entry => {
 
                 // 創建 <li> 元素
@@ -125,8 +125,35 @@ function fetchMessages() {
                 
                 // 將 <li> 添加到 messageList 中
                 messageList.appendChild(listItem);
+            });
+
+
+            ///////// 計算百分比 /////////
+            let boyCount = 0;
+            let girlCount = 0;
+            let totalCount = data.length;  // 總留言數
+
+            data.forEach(entry => {
+                // 計算 "Boy" 和 "Girl" 的數量
+                if (entry.猜猜 === 'Boy') {
+                    boyCount++;
+                } else if (entry.猜猜 === 'Girl') {
+                    girlCount++;
+                }
 
             });
+
+            // 計算百分比並四捨五入
+            let boyPercentage = Math.round((boyCount / totalCount) * 100); // 四捨五入取整
+            let girlPercentage = Math.round((girlCount / totalCount) * 100);
+
+            // 顯示 "Boy" 和 "Girl" 的計數結果
+            const candyQtyGirl = document.getElementById('candyQtyGirl');
+            const candyQtyBoy = document.getElementById('candyQtyBoy');
+            candyQtyGirl.textContent = `${girlPercentage}` +'%';
+            candyQtyBoy.textContent = `${boyPercentage}` +'%';
+
+
         })
         .catch(error => {
             console.error('Error:', error);
