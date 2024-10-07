@@ -431,9 +431,19 @@ body {
   transform: scale(0.95);
 }
 
-#formResult {
-    text-align: center;
+.popup-form-result {
+    background: none;
 }
+.popup-form-result .popup-content {
+    width: auto;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: bold;
+    background: rgb(85 60 91 / 52%);
+}
+
 .popup-form .tt {
     margin: 20px auto;
 }
