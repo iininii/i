@@ -1,10 +1,6 @@
-const formBox = document.getElementById('formBox');
 const form = document.getElementById('commentForm');
 const submitButton = document.getElementById('btn-send');
-
-const formResult = document.getElementById('formResult');
 const statusElement = document.getElementById('status');
-
 const messageList = document.getElementById('candyBox');
 
 // Google Apps Script Web App 的 URL
@@ -43,9 +39,16 @@ form.addEventListener('submit', function(e) {
     .then(response => response.json())
     .then(result => {
         if (result.status === 'success') {
-            formBox.style.display = 'none';
-            formResult.style.display = 'block';
-            statusElement.textContent = '留言已成功提交！';
+            const popupForm = document.getElementById('popup-form');
+            const popupFormResult = document.getElementById('popup-form-result');
+            popupForm.style.display = 'none';
+            popupFormResult.style.display = 'block';
+            statusElement.textContent = '留言已成功送出';
+
+            setInterval(function() {
+                popupFormResult.style.display = 'none';
+            }, 2000);
+
             form.reset();
 
             //////////// 即時在頁面上顯示新提交的留言
@@ -167,11 +170,7 @@ function fetchGender() {
         });
 };
 
-// 初始化時加載現有的資料
-fetchMessages();
-fetchGender();
-
-
+// 4. 倒數顯示揭曉按鈕
 function dateCountdown() {
     // 設定 GMT+8 時區的目標日期（用本地時間模擬 GMT+8）
     const targetDate = new Date("2024-10-19T20:00:00+08:00").getTime();
@@ -203,25 +202,23 @@ function dateCountdown() {
     }, 1000);
 };
 
+// 初始化時加載現有的資料
+fetchMessages();
+fetchGender();
 dateCountdown();
 
-        
 
 
 jQuery(function($) {
 
     $(".btn-normal").on('click', function(event) {
-
       $('.popup-form').fadeIn();
-
     });
 
     /*-------- 其他功能 --------*/
-    $(".pop-close, .popup-result").on('click', function(event) {
+    $(".pop-close, .popup-result, #formResult").on('click', function(event) {
         $(".popup").fadeOut();
     });
-
-
 
 });
 
