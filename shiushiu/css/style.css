@@ -206,11 +206,10 @@ body {
 /*------------ 糖果區 START -------------*/
     .candyBoxWrap {
         overflow-y: auto;
-        
     }
     @keyframes candyBoxScrollFromRight {
         0% {
-            transform: translateX(0);  /* 從初始位置開始 */
+            transform: translateX(0%);  /* 從初始位置開始 */
         }
         100% {
             transform: translateX(-70%);  /* 滾動到整個寬度 */
@@ -220,18 +219,29 @@ body {
         width: max-content;
         height: 220px;
         margin: 20px auto;
-        padding: 0 50px;
+        padding: 0;
         display: flex;
         white-space: nowrap;
         flex-wrap: wrap;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        align-content: center;
+        align-content: flex-start;
+    }
+    #candyBox:before,
+    #candyBox:after {
+        content: '';
+        display: block;
+        width: 30px;
+        height: 100%;
     }
     @media (min-width: 769px) {
         #candyBox {
             font-size: 0.75em;
+        }
+        #candyBox:before,
+        #candyBox:after {
+            width: 60px;
         }
     }
     @media (max-width: 768px) {
@@ -268,12 +278,31 @@ body {
     }
     #candyBox li span {
         position: absolute;
-/*         font-size: 1em; */
         left: 0;
         right: 0;
         margin: 0 auto;
         top: 50%;
         transform: translateY(-50%) rotate(-15deg);
+    }
+
+    #candyQty {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+        background-color: rgba(255,255,255,0.5);
+        border-radius: 40px;
+        padding: 5px 20px;
+        margin-bottom: 20px;
+    }
+    #candyQty img {
+        width: 18px;
+        height: 18px;
+        margin: 0 3px;
+    }
+    #candyQty img:nth-of-type(2) {
+        margin-left: 10px;
     }
 
     ::-webkit-scrollbar {
