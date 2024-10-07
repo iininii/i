@@ -227,6 +227,7 @@ body {
         justify-content: center;
         align-items: center;
         align-content: flex-start;
+        min-width: 90%;
     }
     #candyBox:before,
     #candyBox:after {
