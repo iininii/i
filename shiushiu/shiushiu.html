@@ -6,7 +6,7 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>咻咻性別揭曉</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=1">
 </head>
 <body>
 
@@ -58,10 +58,11 @@
                 <ul id="candyBox"></ul>
             </div>
 
-
+            <!-- 留言按鈕 -->
             <div class="btn-normal" id="joinButton"><div></div></div>
             <div id="countdown"></div>
             
+            <!-- 揭曉按鈕 -->
             <div id="revealButton"><div></div></div>
 
 
@@ -73,48 +74,50 @@
     </div>
 
     <!-- 留言彈窗 -->
-    <div class="popup popup-form">
+    <div class="popup popup-form" id="popup-form">
         <div class="popup-content">
-            <a href="javascript:;" class="pop-close"></a>
             
-            <div id="formBox">
-                <p class="tt">每個人只能留言一次哦!!<br>送出後你的糖果球就會在畫面上囉</p>
-                
-                <form id="commentForm">
-                    <div class="form-control form-gender">
-                        <label class="form-title">猜咻咻是</label>
-                        <div class="form-con">
-                            <input type="radio" id="female" name="gender" value="Girl" required>
-                            <label for="female" class="btnGender">♀ 女生</label>
-                            <input type="radio" id="male" name="gender" value="Boy" required>
-                            <label for="male" class="btnGender">♂ 男生</label>
-                        </div>
-                    </div>
-                    <div class="form-control">
-                        <label class="form-title" for="name">你的暱稱</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-control">
-                        <label class="form-title" for="message">留言給我們</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <div class="form-control">
-                        <label class="form-title" for="bet">下注金額 <span>(猜中也不會有獎金哦)</span></label>
-                        <input type="text" id="bet" name="bet">
-                    </div>
-                    <button type="submit" id="btn-send"><div></div></button>
-                </form>
-            </div>
+            <a href="javascript:;" class="pop-close"></a>
 
-            <div id="formResult">
-                <p class="tt" id="status"></p>
-            </div>
+            <p class="tt">每個人只能留言一次哦!!<br>送出後你的糖果球就會在畫面上囉</p>
+            
+            <form id="commentForm">
+                <div class="form-control form-gender">
+                    <label class="form-title">猜咻咻是</label>
+                    <div class="form-con">
+                        <input type="radio" id="female" name="gender" value="Girl" required>
+                        <label for="female" class="btnGender">♀ 女生</label>
+                        <input type="radio" id="male" name="gender" value="Boy" required>
+                        <label for="male" class="btnGender">♂ 男生</label>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <label class="form-title" for="name">你的暱稱</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-control">
+                    <label class="form-title" for="message">留言給我們</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-control">
+                    <label class="form-title" for="bet">下注金額 <span>(猜中也不會有獎金哦)</span></label>
+                    <input type="text" id="bet" name="bet">
+                </div>
+                <button type="submit" id="btn-send"><div></div></button>
+            </form>
 
         </div>
     </div>
 
+    <!-- 表單送出彈窗 -->
+    <div class="popup popup-form-result" id="popup-form-result">
+        <div class="popup-content">
+            <p class="tt" id="status"></p>
+        </div>
+    </div>
 
-    <!-- 結果彈窗 -->
+
+    <!-- 性別結果彈窗 -->
     <div class="popup popup-result" id="popup-result">
         <div class="popup-content">
             <div id="genderReveal" class="hidden">
@@ -124,14 +127,6 @@
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/script.js"></script>
-    <script>
-        
-
-    </script>
-
-    <script>
-        
-    </script>
+    <script src="js/script.js?v=1"></script>
 </body>
 </html>
