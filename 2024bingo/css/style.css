@@ -17,60 +17,84 @@ html, body {
 }
 
 body {
-    background: #CAB0FE url(../images/bg.webp) center center no-repeat;
-    background-size: cover;
-    font-size: 62.5%;
+  font-size: 62.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
 }
-
-.wrap {
-    width: 100%;
-    padding-top: 8%;
-}
-
-.container {
-    text-align: center;
-}
-
 
 /*------------ 標題 START -------------*/
 /*------------ 標題 START -------------*/
-
-#game-container {
-  text-align: center;
-}
 
 #grid {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-gap: 10px;
-  margin: 20px auto;
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
 }
-
-#grid div {
-  width: 100px;
-  height: 100px;
-  border: 1px solid #000;
+.grid-item {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.grid-item:hover {
+  background-color: #e0e0e0;
 }
 
-.finish {
-  background-color: lightgreen;
-}
-
-.select {
+.grid-item.finish {
   background-color: lightblue;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px 20px;
+.grid-item.select {
+  background-color: yellow;
+}
+
+/*------------ 標題 END -------------*/
+/*------------ 標題 END -------------*/
+
+/*------------ 登入 START -------------*/
+/*------------ 登入 START -------------*/
+
+#login-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#game-area {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+#grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+}
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.grid-item:hover {
+  background-color: #e0e0e0;
 }
 
 
-/*------------ 標題 END -------------*/
-/*------------ 標題 END -------------*/
-
-
+/*------------ 登入 END -------------*/
+/*------------ 登入 END -------------*/
