@@ -8,22 +8,25 @@
 </head>
 <body>
   <div id="game-container">
-    <!-- 玩家登入區域 -->
+    <!-- 登入區域 -->
     <div id="login-area">
-      <input type="text" id="team-id" placeholder="輸入團隊編號">
-      <input type="text" id="team-name" placeholder="輸入團隊暱稱">
-      <button id="login-btn">進入遊戲</button>
+      <h2>輸入團隊資訊</h2>
+      <input type="text" id="team-id" placeholder="輸入團隊 ID" required />
+      <input type="text" id="team-name" placeholder="輸入團隊名稱" required />
+      <button id="login-btn">登入</button>
     </div>
 
-    <!-- 九宮格遊戲 -->
-    <div id="game-area" style="display: none;">
-      <div id="grid">
-        <!-- 動態生成九宮格 -->
-      </div>
+    <!-- 遊戲區域 -->
+    <div id="game-area">
+      <h2 id="team-info"></h2>
+      <div id="grid"></div>
+
       <!-- 隱藏的文件選擇框 -->
         <input type="file" id="fileInput" style="display: none;" accept="image/*">
+
       <button id="submit-line-btn">提交線路</button>
     </div>
+
   </div>
   <script src="js/script.js"></script>
 </body>
