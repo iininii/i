@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活動網頁</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- 玩家登入區域 -->
+    <div id="login-area">
+      <input type="text" id="team-id" placeholder="輸入團隊編號">
+      <input type="text" id="team-name" placeholder="輸入團隊暱稱">
+      <button id="login-btn">進入遊戲</button>
+    </div>
+
+    <!-- 九宮格遊戲 -->
+    <div id="game-area" style="display: none;">
+      <div id="grid">
+        <!-- 動態生成九宮格 -->
+      </div>
+      <!-- 隱藏的文件選擇框 -->
+        <input type="file" id="fileInput" style="display: none;" accept="image/*">
+      <button id="submit-line-btn">提交線路</button>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
