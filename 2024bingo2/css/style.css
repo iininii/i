@@ -1,0 +1,67 @@
+@import"https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
+html, body {
+  min-height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 768px; 
+}
+
+body {
+  font-size: 62.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
+}
+
+
+/*------------ 登入 START -------------*/
+/*------------ 登入 START -------------*/
+
+#login-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#game-area {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+#grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+}
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.grid-item:hover {
+  background-color: #e0e0e0;
+}
+
+
+/*------------ 登入 END -------------*/
+/*------------ 登入 END -------------*/
+
+
