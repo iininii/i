@@ -15,12 +15,10 @@ const gridData = [
   { id: 'C3', name: '中文9' },
 ];
 
-let teamId = '';
-let teamName = '';
-
 // 選取 DOM 元素
 const loginArea = document.getElementById('login-area');
 const gameArea = document.getElementById('game-area');
+const teamInfo = document.getElementById('team-info');
 const grid = document.getElementById('grid');
 const loginBtn = document.getElementById('login-btn');
 const submitLineBtn = document.getElementById('submit-line-btn');
@@ -29,70 +27,73 @@ const submitLineBtn = document.getElementById('submit-line-btn');
 function initGrid() {
   grid.innerHTML = '';
   gridData.forEach((item) => {
+    // 為每個格子建立一個元素
     const cell = document.createElement('div');
     cell.className = "grid-item";
     cell.textContent = item.name;
     cell.dataset.id = item.id;
     cell.dataset.name = item.name;
+
+    // 點擊事件
     cell.addEventListener('click', () => onCellClick(cell));
+
+    // 添加到九宮格容器中
     grid.appendChild(cell);
   });
+
+  // 從伺服器獲取已完成的格子
+  fetchFinishedGrids();
 }
 
 
+/*------------------------------- 登入相關 START ------------------------------*/
+/*------------------------------- 登入相關 START ------------------------------*/
 
-/////////////////////////// 登入事件
+// 檢查是否已登入
+function checkLogin() {
+  const storedTeamId = localStorage.getItem('teamId');
+  const storedTeamName = localStorage.getItem('teamName');
+
+  if (storedTeamId && storedTeamName) {
+    // 如果有已儲存的資訊，直接顯示遊戲區域
+    loginArea.style.display = 'none';
+    gameArea.style.display = 'flex';
+    teamInfo.textContent = `團隊名稱: ${storedTeamName}`;
+    initGrid();
+  }
+}
+
+// 登入按鈕點擊事件
 loginBtn.addEventListener('click', () => {
-  teamId = document.getElementById('team-id').value;
-  teamName = document.getElementById('team-name').value;
+  const teamId = document.getElementById('team-id').value;
+  const teamName = document.getElementById('team-name').value;
 
   if (teamId && teamName) {
-    // 將資料儲存到 cookie，使用 encodeURIComponent 防止特殊字符問題
-    document.cookie = `teamId=${encodeURIComponent(teamId)}; path=/; max-age=${60 * 60 * 24 * 365}`; // 儲存一年
-    document.cookie = `teamName=${encodeURIComponent(teamName)}; path=/; max-age=${60 * 60 * 24 * 365}`; // 儲存一年
+    // 儲存至 localStorage
+    localStorage.setItem('teamId', teamId);
+    localStorage.setItem('teamName', teamName);
 
+    // 顯示遊戲區域
     loginArea.style.display = 'none';
-    gameArea.style.display = 'block';
+    gameArea.style.display = 'flex';
+    teamInfo.textContent = `團隊名稱: ${teamName}`;
     initGrid();
-    // fetchGameStatus();
   } else {
     alert('請填寫完整資訊');
   }
 });
 
-// 在頁面加載時，檢查是否有 cookie 並自動填入資料
-window.addEventListener('load', () => {
-  const cookies = document.cookie.split('; ');
-  let teamIdFromCookie = '';
-  let teamNameFromCookie = '';
+// 初始化檢查
+checkLogin();
 
-  // 搜尋 cookie 中的 teamId 和 teamName
-  cookies.forEach(cookie => {
-    const [key, value] = cookie.split('=');
-    if (key === 'teamId') {
-      teamIdFromCookie = decodeURIComponent(value); // 解碼值
-    }
-    if (key === 'teamName') {
-      teamNameFromCookie = decodeURIComponent(value); // 解碼值
-    }
-  });
-
-  console.log(`Cookie data: teamId=${teamIdFromCookie}, teamName=${teamNameFromCookie}`);
-
-  // 如果 cookie 中有 teamId 和 teamName，則自動填充並跳過表單
-  if (teamIdFromCookie && teamNameFromCookie) {
-    // 跳過登入表單，直接顯示遊戲區域
-    loginArea.style.display = 'none';
-    gameArea.style.display = 'block';
-    initGrid();
-
-    console.log(`Loaded data: teamId=${teamIdFromCookie}, teamName=${teamNameFromCookie}`);
-  }
-});
+/*------------------------------- 登入相關 END ------------------------------*/
+/*------------------------------- 登入相關 END ------------------------------*/
 
 
 
-
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 
@@ -115,11 +116,7 @@ async function onCellClick(cell) {
   fileInput.onchange = async function(event) {
     const file = event.target.files[0];
     if (file) {
-      const photoPath = await uploadPhotoToDrive(file, cell.dataset.id, cell.dataset.name); // 上傳照片
-      if (photoPath) {
-        cell.classList.add('finish');
-        await updateFinishInSheet(cell.dataset.id, cell.dataset.name, photoPath); // 更新 Google Sheet
-      }
+      await uploadPhotoToDrive(file, cell.dataset.id, cell.dataset.name); // 上傳照片
     }
   };
 }
@@ -138,55 +135,52 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         action: 'uploadPhoto',
-        teamId, // 團隊 ID
-        teamName, // 團隊名稱
+        teamId: localStorage.getItem('teamId'),
+        teamName: localStorage.getItem('teamName'),
         gridId, // 格子 ID
         gridName, // 格子名稱
         file: base64String, // Base64 編碼的檔案
         fileType, // 檔案類型
         fileName, // 檔案名稱
       }),
-    mode: 'no-cors',  // 設定 no-cors 模式
+      mode: 'no-cors',  // 設定 no-cors 模式
     });
 
-    const result = await response.json();
-    if (result.success) {
-      console.log('照片上傳成功:', result.fileUrl);
-      return result.fileUrl; // 返回圖片 URL
-    } else {
-      alert('上傳失敗: ' + result.message);
-      return null;
-    }
+    await sleep(5000);  // Sleep for 5 seconds
+    console.log('照片上傳成功');
+    fetchFinishedGrids();
+
+    // const result = await response.json();
+    // if (result.success) {
+    //   console.log('照片上傳成功:', result.fileUrl);
+    //   return result.fileUrl; // 返回圖片 URL
+    // } else {
+    //   alert('上傳失敗: ' + result.message);
+    //   return null;
+    // }
   };
 
   reader.readAsDataURL(file); // 轉換檔案為 Base64
 }
 
-// 更新 Google Sheet 第一個工作表
-async function updateFinishInSheet(gridId, gridName, photoPath) {
-  const response = await fetch(API_BASE_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      action: 'updateFinish',
-      teamId, // 團隊 ID
-      teamName, // 團隊名稱
-      gridId, // 格子 ID
-      gridName, // 格子名稱
-      photoPath,
-    }),
-    mode: 'no-cors',  // 設定 no-cors 模式
-  });
 
+
+// 獲取已完成的格子
+async function fetchFinishedGrids() {
+  const teamId = localStorage.getItem('teamId');
+  const response = await fetch(`${API_BASE_URL}?action=getFinished&teamId=${teamId}`, {
+    method: 'GET',
+    redirect: 'follow'
+  });
   const result = await response.json();
-  if (result.status === 'success') {
-    console.log('成功更新至 Google Sheet');
-  } else {
-    console.error('更新 Google Sheet 失敗');
+
+  if (result.success) {
+    result.finishedGrids.forEach((gridId) => {
+      const cell = document.querySelector(`[data-id="${gridId}"]`);
+      if (cell) cell.classList.add('finish');
+    });
   }
 }
-
-
 
 
 
