@@ -168,7 +168,7 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
         await sleep(1000);
         await fetchFinishedGrids();
         var currentGrids = currentFinishedGrids();
-        if (currentGrids.size >= finishedGrids.size) {
+        if (currentGrids.size > finishedGrids.size) {
             currentGrids.forEach(grid => finishedGrids.add(grid));
             alert('照片上傳成功'); // 結束上傳中
             upload = true;
