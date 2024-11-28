@@ -1,33 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>活動網頁</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>食字路口-風城美食獵人</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="game-container">
-    <!-- 登入區域 -->
-    <div id="login-area">
-      <h2>輸入團隊資訊</h2>
-      <input type="text" id="team-id" placeholder="輸入團隊 ID" required />
-      <input type="text" id="team-name" placeholder="輸入團隊名稱" required />
-      <button id="login-btn">登入</button>
+    <div id="game-container">
+        <!-- 登入區域 -->
+        <div id="login-area">
+            <h2>輸入團隊資訊</h2>
+            <input type="text" id="team-id" placeholder="輸入團隊 ID" required />
+            <input type="text" id="team-name" placeholder="輸入團隊名稱" required />
+            <button id="login-btn">登入</button>
+        </div>
+
+        <!-- 遊戲區域 -->
+        <div id="game-area">
+            <img src="images/title.webp" class="title">
+            <h2 id="team-info" class="team-info"></h2>
+            <div id="grid-box">
+                <div id="grid"></div> 
+                <div id="line" class="viewonly">
+                    <input type="radio" name="line-answer" class="line-item" id="h1">
+                    <label for="h1"></label>
+
+                    <input type="radio" name="line-answer" class="line-item active" id="h2">
+                    <label for="h2"></label>
+
+                    <input type="radio" name="line-answer" class="line-item" id="h3" disabled>
+                    <label for="h3"></label>
+
+                    <input type="radio" name="line-answer" class="line-item" id="v1" disabled>
+                    <label for="v1"></label>
+
+                    <input type="radio" name="line-answer" class="line-item" id="v2">
+                    <label for="v2"></label>
+
+                    <input type="radio" name="line-answer" class="line-item" id="v3" disabled>
+                    <label for="v3"></label>
+
+                    <input type="radio" name="line-answer" class="line-item" id="s1">
+                    <label for="s1"></label>
+
+                    <input type="radio" name="line-answer" class="line-item" id="s2" disabled>
+                    <label for="s2"></label>
+                </div> 
+
+                
+
+                <!-- 隱藏的文件選擇框 -->
+                <input type="file" id="fileInput" style="display: none;" accept="image/*">
+            </div>
+            <button id="edit-line-btn" class="edit-line-btn" alt="選擇線路" onclick="showLine()"></button>
+            <div id="action-line" class="action-line">
+                <button id="cancel-line-btn" class="cancel-line-btn" alt="取消" onclick="hideLine()"></button>
+                <button id="submit-line-btn" class="submit-line-btn" alt="確定線路"></button>    
+            </div>
+        </div>
+    </div>
+    <div id="game-bottom">
+        <button id="rule-btn" class="rule-btn" alt="規則"></button>    
     </div>
 
-    <!-- 遊戲區域 -->
-    <div id="game-area">
-      <h2 id="team-info"></h2>
-      <div id="grid"></div>
-
-      <!-- 隱藏的文件選擇框 -->
-        <input type="file" id="fileInput" style="display: none;" accept="image/*">
-
-      <button id="submit-line-btn">提交線路</button>
+    <!-- 規則彈窗 -->
+    <div class="popup popup-rule" id="popup-rule">
+        <div class="popup-content">
+            <div class="rule-text">
+                rewfwefwefewfewfwef
+            </div>
+            <img src="images/bg_rule.webp" class="bg">
+        </div>
     </div>
 
-  </div>
-  <script src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        function showLine() {
+          document.getElementById('line').classList.remove('viewonly');
+          document.getElementById('edit-line-btn').style.display = 'none';
+          document.getElementById('action-line').style.display = 'flex';
+        }
+        function hideLine() {
+          document.getElementById('line').classList.add('viewonly');
+          document.getElementById('edit-line-btn').style.display = 'block';
+          document.getElementById('action-line').style.display = 'none';
+        }
+
+
+        jQuery(function($) {
+
+            $(".rule-btn").on('click', function(event) {
+              $('.popup-rule').fadeIn();
+            });
+
+            /*-------- 其他功能 --------*/
+            $(".pop-close, .popup-rule").on('click', function(event) {
+                $(".popup").fadeOut();
+            });
+
+        });
+
+
+        $(window).on('load', function (e) {
+            // delete preloader
+            $(".preloader").fadeOut(300);
+        });
+    </script>
 </body>
 </html>
