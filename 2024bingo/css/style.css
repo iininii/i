@@ -13,57 +13,239 @@ html, body {
     width: 100%;
     margin: 0 auto;
     max-width: 768px;
-    
+    padding: 0;
 }
 
 body {
   font-size: 62.5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   margin: 0;
   flex-direction: column;
+  background: url('../images/bg_game.webp') no-repeat center bottom;
+  background-color: #F6B859;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
 }
 
-/*------------ 標題 START -------------*/
-/*------------ 標題 START -------------*/
+.title {
+  width: 30vh;
+  margin: 5vw 0 2em;
+}
+
+#game-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(0deg, #cf9030, transparent);
+  padding: 0.5em;
+}
+.rule-btn {
+  background: url('../images/btn_rule.webp') no-repeat center center;
+  background-size: 100%;
+  border: none;
+  display: block;
+  width: 20%;
+  padding-bottom: 20%;
+  margin: 0 0.5em;
+}
+
+/*------------ 卡片區域 START -------------*/
+/*------------ 卡片區域 START -------------*/
+.team-info {
+  font-size: 1rem;
+  background-color: #F3E8DB;
+  border-radius: 8px;
+  padding: 0.5em 1.2em;
+  color: #40220F;
+}
+
+#grid-box {
+  position: relative;
+  margin: 2rem auto;
+}
 
 #grid {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
+  grid-template-columns: repeat(3, 110px);
+  grid-template-rows: repeat(3, 110px);
+  gap: 12px;
 }
 .grid-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  padding: 0.5em;
+  color: #40220F;
+  border: 2px solid #9B1E24;
+  background-color: #FFF9F1;
+  text-align: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 0.875rem;
   font-weight: bold;
   transition: background-color 0.3s;
+  position: relative;
 }
-.grid-item:hover {
-  background-color: #e0e0e0;
+.grid-item:after {
+  content: '';
+  display: block;
+  z-index: -2;
+  background-color: #9B1E24;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
 }
-
 .grid-item.finish {
-  background-color: lightblue;
+  background-image: url('../images/icon_peanut.webp');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50%;
 }
 
 .grid-item.select {
   background-color: yellow;
 }
 
-/*------------ 標題 END -------------*/
-/*------------ 標題 END -------------*/
+
+#line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+#line.viewonly {
+  pointer-events: none;
+}
+#line.viewonly .line-item+label {
+ display: none;
+}
+#line.viewonly .line-item.active+label {
+ display: block;
+}
+.line-item {
+  display: none;
+}
+.line-item+label {
+  background-color: rgb(255 255 255 / 50%);
+  border: 2px dashed #9B1E24;
+  display: block;
+  border-radius: 100px;
+  position: absolute;
+  z-index: 2;
+}
+.line-item.active+label {
+  background-color: #9B1E24;
+  border: 1px solid #ec5960;
+  z-index: 4;
+}
+.line-item:disabled+label {
+  display: none;
+  z-index: 1;
+}
+.line-item:checked+label {
+  background-color: #29B286;
+  border: 1px solid #4ffcc5;
+  z-index: 3;
+}
+.line-item[id^="h"]+label {
+  width: 110%;
+  height: 20px;
+  left: -5%;
+}
+.line-item[id="h1"]+label {
+  top: calc( (100% / 3) *1 - 70px);
+}
+.line-item[id="h2"]+label {
+  top: calc( (100% / 3) *2 - 70px);
+}
+.line-item[id="h3"]+label {
+  top: calc( (100% / 3) *3 - 70px);
+}
+.line-item[id^="v"]+label {
+  width: 20px;
+  height: 110%;
+  top: -5%;
+}
+.line-item[id="v1"]+label {
+  left: calc( (100% / 3) *1 - 70px);
+}
+.line-item[id="v2"]+label {
+  left: calc( (100% / 3) *2 - 70px);
+}
+.line-item[id="v3"]+label {
+  left: calc( (100% / 3) *3 - 70px);
+}
+.line-item[id="s1"]+label {
+  width: 20px;
+  height: 150%;
+  left: 50%;
+  top: 50%;
+  transform: rotate(-45deg) translateX(-50%) translateY(-50%);
+  transform-origin: 0 0;
+}
+.line-item[id="s2"]+label {
+  width: 20px;
+  height: 150%;
+  left: 50%;
+  top: 50%;
+  transform: rotate(45deg) translateX(-50%) translateY(-50%);
+  transform-origin: 0 0;
+}
+
+
+.edit-line-btn {
+  background: url('../images/btn_edit-line.webp') no-repeat center center;
+  background-size: 100%;
+  border: none;
+  display: block;
+  width: 150px;
+  padding-bottom: 17%;
+}
+
+.action-line {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.submit-line-btn {
+  background: url('../images/btn_submit-line.webp') no-repeat center center;
+  background-size: 100%;
+  border: none;
+  display: block;
+  width: 150px;
+  padding-bottom: 17%;
+  margin: 0 0.5em;
+}
+.cancel-line-btn {
+  background: url('../images/btn_cancel.webp') no-repeat center center;
+  background-size: 100%;
+  border: none;
+  display: block;
+  width: 150px;
+  padding-bottom: 17%;
+  margin: 0 0.5em;
+}
+/*------------ 卡片區域 END -------------*/
+/*------------ 卡片區域 END -------------*/
 
 /*------------ 登入 START -------------*/
 /*------------ 登入 START -------------*/
-
+#game-container {
+  width: 100%;
+}
 #login-area {
   display: flex;
   flex-direction: column;
@@ -73,28 +255,218 @@ body {
   display: none;
   flex-direction: column;
   align-items: center;
+  
 }
-#grid {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
+
+
+/*------------ 登入 END -------------*/
+/*------------ 登入 END -------------*/
+
+
+
+/*------------ POPUP START -------------*/
+/*------------ POPUP START -------------*/
+.popup{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 20;
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  display: none;
 }
-.grid-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+/*使視窗置中*/
+.popup:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.05em;
+}
+.popup-content {
+  max-width: 90%;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  z-index: 3;
+  padding: 0;
+  margin: 30px auto;
+  width: 560px;
+  position: relative;
+  color: #553B5B;
+}
+.pop-close {
+  background-image: url('../images/img_close.svg');
+  background-position: center bottom;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  width: 8%;
+  padding-bottom: 8%;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  z-index: 5;
   cursor: pointer;
+}
+.pop-close:active {
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+.popup-rule .popup-content {
+  background-color: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.popup-rule .bg {
+  width: 100%;
+}
+.popup-rule .rule-text {
+  position: absolute;
+  width: 83%;
+  height: 52%;
+  left: 5%;
+  top: 30%;
+  padding: 1em;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.3s;
-}
-.grid-item:hover {
-  background-color: #e0e0e0;
 }
 
+.popup-form-result {
+    background: none;
+}
+.popup-form-result .popup-content {
+    width: auto;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: bold;
+    background: rgb(85 60 91 / 52%);
+}
 
-/*------------ 登入 END -------------*/
-/*------------ 登入 END -------------*/
+.popup-form .tt {
+    margin: 20px auto;
+}
+
+.popup-form .popup-content {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.popup-form #btn-send {
+    width: 200px;
+    margin: 25px auto 10px;
+    border: none;
+    display: block;
+    background-color: transparent;
+}
+.popup-form #btn-send:active {
+    transform: scale(0.95);
+}
+.popup-form #btn-send div {
+    background: url('../images/btn_send_1.webp') no-repeat;
+    background-size: 100%;
+    width: 100%;
+    padding-bottom: 29%;
+}
+.popup-form #btn-send[disabled] div {
+    background-position: center bottom;
+    opacity: 0.8;
+}
+.popup-form #btn-send[disabled]:active {
+    transform: scale(1);
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+.form-control .form-title {
+    margin-bottom: 5px;
+    display: block;
+}
+.form-control .form-title span {
+    font-size: 0.75em;
+}
+
+.form-control.form-gender {
+    text-align: center;
+    background-color: #ecdaf1;
+    border-radius: 5px;
+    padding: 20px 10px;
+}
+.form-control.form-gender input[type="radio"] {
+    display: none;
+}
+.form-control.form-gender input[type="radio"] + label[for="male"] {
+    text-shadow: 0 0 8px #0064c0;
+    background: url('../images/img_candy-boy.webp') center center no-repeat;
+    background-size: contain;
+}
+.form-control.form-gender input[type="radio"] + label[for="female"] {
+    text-shadow: 0 0 8px #cb0057;
+    background: url('../images/img_candy-girl.webp') center center no-repeat;
+    background-size: contain;
+}
+.form-control.form-gender input[type="radio"]:checked + label {
+    box-shadow: 0 0 10px #ffe94a, 0 0 5px #b49e00, inset 0 0 15px #ffe844;
+}
+.form-control.form-gender label.btnGender {
+    display: inline-block;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-shadow: 0 0 2px #000;
+    text-align: center;
+    border-radius: 100px;
+    margin: 0 15px;
+}
+
+input[type="text"] {
+    background-color: #F8F2F9;
+    border: 1px solid #B395BA;
+    border-radius: 5px;
+    height: 52px;
+    width: 100%;
+    padding: 0 10px;
+    font-size: 18px;
+}
+textarea {
+    background-color: #F8F2F9;
+    border: 1px solid #B395BA;
+    border-radius: 5px;
+    height: 130px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    background-color: #F8F2F9;
+    border: 1px solid transparent;
+    outline: 3px solid #ffe94a;
+}
+/*------------ POPUP END -------------*/
+/*------------ POPUP END -------------*/
+
+
+
+
