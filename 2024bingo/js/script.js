@@ -3,15 +3,15 @@ const API_BASE_URL = "https://script.google.com/macros/s/AKfycbynD2nnJBEv_yXxZEc
 
 // 預設九宮格 ID 和中文名稱
 const gridData = [
-  { id: 'A1', name: '中文1' },
-  { id: 'A2', name: '中文2' },
-  { id: 'A3', name: '中文3' },
-  { id: 'B1', name: '中文4' },
-  { id: 'B2', name: '中文5' },
-  { id: 'B3', name: '中文6' },
-  { id: 'C1', name: '中文7' },
-  { id: 'C2', name: '中文8' },
-  { id: 'C3', name: '中文9' },
+  { id: 'A1', name: '紅磚 珍珠奶茶一杯' },
+  { id: 'A2', name: '福泉豆花「三色豆花」' },
+  { id: 'A3', name: '北原夜市鴨肉麵（中正路「小炒麵+鴨舌頭」）' },
+  { id: 'B1', name: '好吃麵「乾麵綜合湯+粉腸or三合肉」' },
+  { id: 'B2', name: '三味鹹酥雞「綜合」' },
+  { id: 'B3', name: '梅花雞蛋糕一包' },
+  { id: 'C1', name: '雙星甜不辣的甜不辣一碗' },
+  { id: 'C2', name: '北門炸粿「肉粿+蚵仔嗲」' },
+  { id: 'C3', name: '南門當歸鴨「當歸鴨麵線」' },
 ];
 
 // 已完成的九宮格 ID
@@ -85,7 +85,7 @@ function checkLogin() {
     // 如果有已儲存的資訊，直接顯示遊戲區域
     loginArea.style.display = 'none';
     gameArea.style.display = 'flex';
-    teamInfo.textContent = `團隊名稱: ${storedTeamName}`;
+    teamInfo.textContent = `${storedTeamName}`;
     initGrid();
   }
 }
@@ -120,7 +120,7 @@ async function onCellClick(cell) {
     return;
   }
 
-  const confirmed = confirm(`確認上傳照片到 ${cell.dataset.name} 嗎？`);
+  const confirmed = confirm(`確認上傳 ${cell.dataset.name} 的完食照嗎？`);
   if (!confirmed) return;
 
   // 觸發檔案選擇框
@@ -168,7 +168,7 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
         await sleep(1000);
         await fetchFinishedGrids();
         var currentGrids = currentFinishedGrids();
-        if (currentGrids.size > finishedGrids.size) {
+        if (currentGrids.size >= finishedGrids.size) {
             currentGrids.forEach(grid => finishedGrids.add(grid));
             alert('照片上傳成功'); // 結束上傳中
             upload = true;
