@@ -45,7 +45,7 @@ loginBtn.addEventListener('click', () => {
     teamInfo.textContent = `${teamName}`;
     initGrid();
   } else {
-    alert('請填寫完整資訊');
+    showCustomPopup(`請填寫完整資訊`, false); 
   }
 });
 
@@ -55,7 +55,7 @@ submitLineBtn.addEventListener('click', async () => {
   const lineIds = selectedCells.map((cell) => cell.dataset.id);
 
   if (!lineIds.length) {
-    alert('請選擇至少一條線路');
+    showCustomPopup(`請選擇一條線路`, false); 
     return;
   }
 
@@ -73,7 +73,7 @@ submitLineBtn.addEventListener('click', async () => {
   const result = await response.json();
   if (result.success) {
     selectedCells.forEach((cell) => cell.classList.add('select'));
-    alert('線路提交成功');
+    showCustomPopup(`線路送出成功，快去找關主吧`, false); 
   }
 });
 
@@ -118,11 +118,11 @@ function initGrid() {
 // 點擊九宮格事件
 async function onCellClick(cell) {
   if (cell.classList.contains('finish')) {
-    alert('你已經吃過拉！');
+    showCustomPopup(`你已經吃過拉！`, false); 
     return;
   }
 
-  const confirmed = confirm(`確認上傳 ${cell.dataset.name} 的完食照嗎？`);
+  const confirmed = await showCustomPopup(`確認上傳 ${cell.dataset.name} 的完食照嗎？`);
   if (!confirmed) return;
 
   // 觸發檔案選擇框
@@ -172,7 +172,7 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
         var currentGrids = currentFinishedGrids();
         if (currentGrids.size >= finishedGrids.size) {
             currentGrids.forEach(grid => finishedGrids.add(grid));
-            alert('照片上傳成功'); // 結束上傳中
+            await showCustomPopup(`照片上傳成功`, false); // 結束上傳中
             upload = true;
         }
     }
@@ -210,4 +210,62 @@ function currentFinishedGrids() {
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+// 點擊按鈕取得關主位置的URL
+function getBossLocationUrl() {
+  document.getElementById('fetch-location-btn').addEventListener('click', async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}?action=getBossLocation`);
+      const data = await response.json();
+
+      console.log(data);
+
+      if (data.success) {
+        // 開啟位置 URL
+        window.open(data.url, '_blank');
+      } else {
+        alert('無法取得關主位置: ' + data.message);
+      }
+    } catch (error) {
+      console.error('無法取得關主位置:', error);
+      showCustomPopup(`發生錯誤，請稍後再試！`, false); 
+    }
+  });
+}
+getBossLocationUrl()
+
+
+// 顯示模態框
+function showCustomPopup(message, showCancel = true) {
+  return new Promise((resolve, reject) => {
+    // 顯示模態框
+    const popup = document.getElementById('popup-comfirm');
+    const popupMessage = document.getElementById('popup-message');
+    const confirmBtn = document.getElementById('popup-confirm-btn');
+    const cancelBtn = document.getElementById('popup-cancel-btn');
+    
+    popupMessage.textContent = message;
+    popup.style.display = 'block';  // 顯示模態框
+
+    // 根據參數決定是否顯示取消按鈕
+    if (showCancel) {
+      cancelBtn.style.display = 'inline-block'; // 顯示取消按鈕
+    } else {
+      cancelBtn.style.display = 'none'; // 隱藏取消按鈕
+    }
+
+    // 確認按鈕事件
+    confirmBtn.onclick = function() {
+      popup.style.display = 'none';  // 隱藏模態框
+      resolve(true);  // 回傳確認結果
+    };
+
+    // 取消按鈕事件
+    cancelBtn.onclick = function() {
+      popup.style.display = 'none';  // 隱藏模態框
+      resolve(false);  // 回傳取消結果
+    };
+  });
 }
