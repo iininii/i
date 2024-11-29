@@ -18,6 +18,7 @@ const gridData = [
 const finishedGrids = new Set();
 
 // 選取 DOM 元素
+const startArea = document.getElementById('start-area');
 const loginArea = document.getElementById('login-area');
 const gameArea = document.getElementById('game-area');
 const teamInfo = document.getElementById('team-info');
@@ -41,7 +42,7 @@ loginBtn.addEventListener('click', () => {
     // 顯示遊戲區域
     loginArea.style.display = 'none';
     gameArea.style.display = 'flex';
-    teamInfo.textContent = `團隊名稱: ${teamName}`;
+    teamInfo.textContent = `${teamName}`;
     initGrid();
   } else {
     alert('請填寫完整資訊');
@@ -83,6 +84,7 @@ function checkLogin() {
 
   if (storedTeamId && storedTeamName) {
     // 如果有已儲存的資訊，直接顯示遊戲區域
+    startArea.style.display = 'none';
     loginArea.style.display = 'none';
     gameArea.style.display = 'flex';
     teamInfo.textContent = `${storedTeamName}`;
@@ -116,7 +118,7 @@ function initGrid() {
 // 點擊九宮格事件
 async function onCellClick(cell) {
   if (cell.classList.contains('finish')) {
-    alert('該格已完成');
+    alert('你已經吃過拉！');
     return;
   }
 
