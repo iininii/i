@@ -6,7 +6,7 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
     <div id="game-container">
@@ -84,7 +84,8 @@
         </div>
     </div>
     <div id="game-bottom">
-        <button id="rule-btn" class="rule-btn" alt="規則"></button>    
+        <button id="rule-btn" class="rule-btn" alt="規則"></button>  
+        <button id="fetch-location-btn" class="fetch-location-btn" alt="關主位置"></button>  
     </div>
 
     <!-- 規則彈窗 -->
@@ -103,6 +104,17 @@
         </div>
     </div>
 
+    <!-- 確認彈窗 -->
+    <div class="popup popup-comfirm" id="popup-comfirm">
+        <div class="popup-content">
+            <div class="msg" id="popup-message"></div>
+            <div class="button-box">
+                <button id="popup-cancel-btn" class="cancel-btn" alt="取消"></button>
+                <button id="popup-confirm-btn" class="comfirm-btn" alt="確定"></button>    
+            </div>
+        </div>
+    </div>
+
     <!-- Loading時不可操作 -->
     <div class="popup popup-loading" id="popup-loading">
         <div class="popup-content">
@@ -111,7 +123,7 @@
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/script.js?v=2"></script>
+    <script src="js/script.js?v=3"></script>
     <script>
         function showLogin() {
           document.getElementById('start-area').style.display = 'none';

@@ -6,47 +6,42 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
     <div id="boss-container">
         <div id="winner-form">
-            <h2>輸入獲勝隊伍</h2>
-            <input type="number" id="team-id" placeholder="輸入團隊 ID" required />
-            <div class="win-line-box">
-                <input type="radio" name="line-answer" class="win-line-item" id="h1">
-                <label for="h1"><img src="images/h1.webp" alt=""></label>
+            <h2>選擇獲勝隊伍</h2>
+            <div class="select-win-team">
+                <input type="radio" name="team-answer" class="team-line-item" id="1">
+                <label for="1"><p>花生花生花生花生花生花生花生花生花生花生隊👍</p><img src="images/h1.webp" alt=""></label>
 
-                <input type="radio" name="line-answer" class="win-line-item" id="h2">
-                <label for="h2"><img src="images/h2.webp" alt=""></label>
+                <input type="radio" name="team-answer" class="team-line-item" id="2">
+                <label for="2"><p>青蛙隊👍</p><img src="images/s1.webp" alt=""></label>
 
-                <input type="radio" name="line-answer" class="win-line-item" id="h3">
-                <label for="h3"><img src="images/h3.webp" alt=""></label>
-
-                <input type="radio" name="line-answer" class="win-line-item" id="s1">
-                <label for="s1"><img src="images/s1.webp" alt=""></label>
-
-                <input type="radio" name="line-answer" class="win-line-item" id="v1">
-                <label for="v1"><img src="images/v1.webp" alt=""></label>
-
-                <input type="radio" name="line-answer" class="win-line-item" id="v2">
-                <label for="v2"><img src="images/v2.webp" alt=""></label>
-
-                <input type="radio" name="line-answer" class="win-line-item" id="v3">
-                <label for="v3"><img src="images/v3.webp" alt=""></label>
-
-                <input type="radio" name="line-answer" class="win-line-item" id="s2">
-                <label for="s2"><img src="images/s2.webp" alt=""></label>
+                <input type="radio" name="team-answer" class="team-line-item" id="3">
+                <label for="3"><p>海豚隊👍</p><img src="images/v1.webp" alt=""></label>
             </div>
-            <button id="winner-btn" class="winner-btn"></button>
+            <button id="winner-comfirm-btn" class="winner-btn"></button>
         </div>
-        <div id="winner-result"> <!-- 輸入獲勝後，就隱藏#winner-form 並顯示#winner-result -->
+
+        <div id="winner-result" style="display: none"> <!-- 輸入獲勝後，就隱藏#winner-form 並顯示#winner-result -->
             <h2>獲勝隊伍：第 1 組 - 花生隊👍</h2>
         </div>
-
-        <button id="getLocation">傳送位置</button>
     </div>
+
+    <!-- 確認彈窗 -->
+    <div class="popup popup-comfirm" id="popup-comfirm">
+        <div class="popup-content">
+            <div class="msg" id="popup-message"></div>
+            <div class="button-box">
+                <button id="popup-cancel-btn" class="cancel-btn" alt="取消"></button>
+                <button id="popup-confirm-btn" class="comfirm-btn" alt="確定"></button>    
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/boss.js?v=2"></script>
+    <script src="js/boss.js?v=3"></script>
 </body>
 </html>
