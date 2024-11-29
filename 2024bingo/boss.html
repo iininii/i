@@ -1,13 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>活動網頁</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>食字路口-風城美食獵人</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
-  
-  <script src="script.js"></script>
+    <div id="boss-container">
+        <div id="winner-form">
+            <h2>輸入獲勝隊伍</h2>
+            <input type="number" id="team-id" placeholder="輸入團隊 ID" required />
+            <div class="win-line-box">
+                <input type="radio" name="line-answer" class="win-line-item" id="h1">
+                <label for="h1"><img src="images/h1.webp" alt=""></label>
+
+                <input type="radio" name="line-answer" class="win-line-item" id="h2">
+                <label for="h2"><img src="images/h2.webp" alt=""></label>
+
+                <input type="radio" name="line-answer" class="win-line-item" id="h3">
+                <label for="h3"><img src="images/h3.webp" alt=""></label>
+
+                <input type="radio" name="line-answer" class="win-line-item" id="s1">
+                <label for="s1"><img src="images/s1.webp" alt=""></label>
+
+                <input type="radio" name="line-answer" class="win-line-item" id="v1">
+                <label for="v1"><img src="images/v1.webp" alt=""></label>
+
+                <input type="radio" name="line-answer" class="win-line-item" id="v2">
+                <label for="v2"><img src="images/v2.webp" alt=""></label>
+
+                <input type="radio" name="line-answer" class="win-line-item" id="v3">
+                <label for="v3"><img src="images/v3.webp" alt=""></label>
+
+                <input type="radio" name="line-answer" class="win-line-item" id="s2">
+                <label for="s2"><img src="images/s2.webp" alt=""></label>
+            </div>
+            <button id="winner-btn" class="winner-btn"></button>
+        </div>
+        <div id="winner-result"> <!-- 輸入獲勝後，就隱藏#winner-form 並顯示#winner-result -->
+            <h2>獲勝隊伍：第 1 組 - 花生隊👍</h2>
+        </div>
+
+        <button id="getLocation">傳送位置</button>
+    </div>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/boss.js?v=2"></script>
 </body>
 </html>

@@ -6,16 +6,37 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
     <div id="game-container">
+
+        <div id="start-area">
+            <img src="images/title.webp" class="title">
+
+            <div class="carousel">
+                <div class="carousel-images fromRight">
+                    <img src="images/img_meq.webp" alt="">
+                    <img src="images/img_meq.webp" alt="">
+                </div>
+            </div>
+
+            <button id="start-btn" class="start-btn" onclick="showLogin()"></button>
+
+            <div class="carousel">
+                <div class="carousel-images fromLeft">
+                    <img src="images/img_meq.webp" alt="">
+                    <img src="images/img_meq.webp" alt="">
+                </div>
+            </div>
+        </div>
+
         <!-- 登入區域 -->
         <div id="login-area">
             <h2>輸入團隊資訊</h2>
-            <input type="text" id="team-id" placeholder="輸入團隊 ID" required />
+            <input type="number" id="team-id" placeholder="輸入團隊 ID" required />
             <input type="text" id="team-name" placeholder="輸入團隊名稱" required />
-            <button id="login-btn">登入</button>
+            <button id="login-btn" class="login-btn"></button>
         </div>
 
         <!-- 遊戲區域 -->
@@ -70,15 +91,33 @@
     <div class="popup popup-rule" id="popup-rule">
         <div class="popup-content">
             <div class="rule-text">
-                rewfwefwefewfewfwef
+                <ol>
+                    <li>關主會選出他最喜愛的9項城隍廟周邊小吃，並在心中選擇一條連線，這條連線即為「遊戲正解」。</li>
+                    <li>每組會拿到一張9項小吃清單的賓果卡。</li>
+                    <li>各組需要點擊賓果卡已吃完的小吃上傳完食照，才能選擇該線路。</li>
+                    <li>每完成一條賓果連線，組員應前往找到開主，詢問該路徑是否為「關主的美食連線」。</li>
+                    <li>若關主回答「不是」，嘗試其他連線直到找出正確連線。</li>
+                </ol>
             </div>
             <img src="images/bg_rule.webp" class="bg">
         </div>
     </div>
 
+    <!-- Loading時不可操作 -->
+    <div class="popup popup-loading" id="popup-loading">
+        <div class="popup-content">
+            Loading...
+        </div>
+    </div>
+
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/script.js?v=1"></script>
+    <script src="js/script.js?v=2"></script>
     <script>
+        function showLogin() {
+          document.getElementById('start-area').style.display = 'none';
+          document.getElementById('popup-rule').style.display = 'block';
+          document.getElementById('login-area').style.display = 'flex';
+        }
         function showLine() {
           document.getElementById('line').classList.remove('viewonly');
           document.getElementById('edit-line-btn').style.display = 'none';
