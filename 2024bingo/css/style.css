@@ -18,7 +18,7 @@ html, body {
 
 body {
   font-size: 62.5%;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   flex-direction: column;
   background: url('../images/bg_game.webp') no-repeat center bottom;
@@ -50,6 +50,15 @@ body {
 }
 .rule-btn {
   background: url('../images/btn_rule.webp') no-repeat center center;
+  background-size: 100%;
+  border: none;
+  display: block;
+  width: 20%;
+  padding-bottom: 20%;
+  margin: 0 0.5em;
+}
+.fetch-location-btn {
+  background: url('../images/btn_boss.webp') no-repeat center center;
   background-size: 100%;
   border: none;
   display: block;
@@ -134,8 +143,19 @@ body {
   opacity: 0.4;
 }
 
-.grid-item.select {
-  background-color: yellow;
+@media (max-width: 375px) {
+  #grid-box {
+    margin: 1rem auto;
+  }
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 6px;
+  }
+  .grid-item {
+    font-size: 0.75rem;
+  }
 }
 
 
@@ -406,26 +426,39 @@ body {
   display: block;
   width: 200px;
   padding-bottom: 17%;
-  margin: 3em 0 0 0;
+  margin: 1em 0 0 0;
 }
-.win-line-box {
+.select-win-team {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
 }
-.win-line-item {
+.team-line-item {
   display: none;
 }
-.win-line-item+label {
+.team-line-item+label {
   display: block;
-  width: 25%;
-}
-.win-line-item+label img {
   width: 100%;
+  background-color: rgb(243 232 219 / 80%);
+  border-radius: 10px;
+  margin-bottom: 1em;
+  padding: 1em 2em;
+  border: 10px solid transparent;
 }
-.win-line-item:checked+label {
-  border: 4px solid yellow;
+.team-line-item+label p {
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+}
+.team-line-item+label img {
+  width: 100px;
+}
+.team-line-item:checked+label {
+  border: 10px solid #d87508;
 }
 /*------------ Boss END -------------*/
 /*------------ Boss END -------------*/
@@ -530,55 +563,40 @@ body {
   font-weight: bold;
 }
 
-.popup-form-result {
-    background: none;
+.popup-comfirm .popup-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 2em;
 }
-.popup-form-result .popup-content {
-    width: auto;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 18px;
-    color: #ffffff;
-    font-weight: bold;
-    background: rgb(85 60 91 / 52%);
+.popup-comfirm .popup-content .msg {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 2em 0;
+}
+.popup-comfirm .button-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-comfirm .cancel-btn {
+  background: url('../images/btn_cancel.webp') no-repeat center center;
+  background-size: 100%;
+  border: none;
+  display: block;
+  width: 150px;
+  padding-bottom: 17%;
+  margin: 0 0.5em;
+}
+.popup-comfirm .comfirm-btn {
+  background: url('../images/btn_comfirm.webp') no-repeat center center;
+  background-size: 100%;
+  border: none;
+  display: block;
+  width: 150px;
+  padding-bottom: 17%;
+  margin: 0 0.5em;
 }
 
-.popup-form .tt {
-    margin: 20px auto;
-}
-
-.popup-form .popup-content {
-    background-color: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: left;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.popup-form #btn-send {
-    width: 200px;
-    margin: 25px auto 10px;
-    border: none;
-    display: block;
-    background-color: transparent;
-}
-.popup-form #btn-send:active {
-    transform: scale(0.95);
-}
-.popup-form #btn-send div {
-    background: url('../images/btn_send_1.webp') no-repeat;
-    background-size: 100%;
-    width: 100%;
-    padding-bottom: 29%;
-}
-.popup-form #btn-send[disabled] div {
-    background-position: center bottom;
-    opacity: 0.8;
-}
-.popup-form #btn-send[disabled]:active {
-    transform: scale(1);
-}
 
 .form-control {
     margin-bottom: 15px;
@@ -589,40 +607,6 @@ body {
 }
 .form-control .form-title span {
     font-size: 0.75em;
-}
-
-.form-control.form-gender {
-    text-align: center;
-    background-color: #ecdaf1;
-    border-radius: 5px;
-    padding: 20px 10px;
-}
-.form-control.form-gender input[type="radio"] {
-    display: none;
-}
-.form-control.form-gender input[type="radio"] + label[for="male"] {
-    text-shadow: 0 0 8px #0064c0;
-    background: url('../images/img_candy-boy.webp') center center no-repeat;
-    background-size: contain;
-}
-.form-control.form-gender input[type="radio"] + label[for="female"] {
-    text-shadow: 0 0 8px #cb0057;
-    background: url('../images/img_candy-girl.webp') center center no-repeat;
-    background-size: contain;
-}
-.form-control.form-gender input[type="radio"]:checked + label {
-    box-shadow: 0 0 10px #ffe94a, 0 0 5px #b49e00, inset 0 0 15px #ffe844;
-}
-.form-control.form-gender label.btnGender {
-    display: inline-block;
-    color: #fff;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    text-shadow: 0 0 2px #000;
-    text-align: center;
-    border-radius: 100px;
-    margin: 0 15px;
 }
 
 input[type="text"], input[type="number"] {
