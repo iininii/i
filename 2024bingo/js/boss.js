@@ -19,3 +19,45 @@ function setWinner(teamId, line) {
 }
 
 ///////////////// 設置獲勝團隊 END /////////////////
+
+
+
+
+// 上傳關主位置
+document.getElementById('getLocation').addEventListener('click', () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      // 顯示位置資訊
+      document.getElementById('locationInfo').innerHTML =
+        `經度: ${longitude}, 緯度: ${latitude}`;
+
+      // 發送到 Google Apps Script
+      const response = await fetch(API_BASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'saveLocation',
+          latitude,
+          longitude,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert('位置已保存至伺服器！');
+      } else {
+        alert('保存位置失敗！');
+      }
+    }, (error) => {
+      console.error('定位錯誤:', error);
+      alert('無法取得定位資訊！');
+    });
+  } else {
+    alert('您的設備不支援地理定位！');
+  }
+});
