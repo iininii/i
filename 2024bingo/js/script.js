@@ -1,5 +1,5 @@
 // 部署作業 ID: AKfycbxxxxxx Web 應用程式 URL: https://script.google.com/macros/s/AKfycbxxxxxx/exec
-const API_BASE_URL = "https://script.google.com/macros/s/AKfycbynD2nnJBEv_yXxZEcoZjDl7AcTxmyXLIT-NbFqFH3_dBQ_G4a6uJ1L3OquJX7f4o-2WQ/exec";
+const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzBWeqs8om6nZAIZxdKemSVOFxSfxk851xze851h0mSJqJ0OOfF4Td8r-CtM6ZTI-F7_w/exec";
 
 // 預設九宮格 ID 和中文名稱
 const gridData = [
@@ -53,13 +53,10 @@ loginBtn.addEventListener('click', () => {
 submitLineBtn.addEventListener('click', async () => {
   const selectedCells = Array.from(grid.querySelectorAll('.finish'));
   const lineIds = selectedCells.map((cell) => cell.dataset.id);
-
   if (!lineIds.length) {
     showCustomPopup(`請選擇一條線路`, false); 
     return;
   }
-
-  // 呼叫 Google Apps Script API 提交線路
   const response = await fetch(API_BASE_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -89,7 +86,51 @@ function checkLogin() {
     gameArea.style.display = 'flex';
     teamInfo.textContent = `${storedTeamName}`;
     initGrid();
+    // 從伺服器獲取已完成的格子並更新可選擇路線
+    fetchFinishedGrids().then(result => {
+        if (result.finishedGrids) {
+            result.finishedGrids.forEach(gridId => {
+                finishedGrids.add(gridId);
+                const cell = document.querySelector(`[data-id="${gridId}"]`);
+                cell.classList.add('finish');
+            });
+            refreshCanSelectPath();
+        }
+    });
+    fetchFinishedPath().then(result => {
+        if (result.finishedPath) {
+            const path = document.getElementById(result.finishedPath);
+            path.classList.add('active');
+        }
+    })
   }
+}
+
+function refreshCanSelectPath() {
+    if (finishedGrids.has('A1') && finishedGrids.has('A2') && finishedGrids.has('A3')) {
+        document.getElementById('h1').removeAttribute('disabled');
+    }
+    if (finishedGrids.has('B1') && finishedGrids.has('B2') && finishedGrids.has('B3')) {
+        document.getElementById('h2').removeAttribute('disabled');
+    }
+    if (finishedGrids.has('C1') && finishedGrids.has('C2') && finishedGrids.has('C3')) {
+        document.getElementById('h3').removeAttribute('disabled');
+    }
+    if (finishedGrids.has('A1') && finishedGrids.has('B1') && finishedGrids.has('C1')) {
+        document.getElementById('v1').removeAttribute('disabled');
+    }
+    if (finishedGrids.has('A2') && finishedGrids.has('B2') && finishedGrids.has('C2')) {
+        document.getElementById('v2').removeAttribute('disabled');
+    }
+    if (finishedGrids.has('A3') && finishedGrids.has('B3') && finishedGrids.has('C3')) {
+        document.getElementById('v3').removeAttribute('disabled');
+    }
+    if (finishedGrids.has('A1') && finishedGrids.has('B2') && finishedGrids.has('C3')) {
+        document.getElementById('s1').removeAttribute('disabled');
+    }
+    if (finishedGrids.has('A3') && finishedGrids.has('B2') && finishedGrids.has('C1')) {
+        document.getElementById('s2').removeAttribute('disabled');
+    }
 }
 
 // 初始化九宮格
@@ -109,10 +150,6 @@ function initGrid() {
     // 添加到九宮格容器中
     grid.appendChild(cell);
   });
-
-  // 從伺服器獲取已完成的格子
-  fetchFinishedGrids()
-    .then(() => currentFinishedGrids().forEach(grid => finishedGrids.add(grid)));
 }
 
 // 點擊九宮格事件
@@ -162,18 +199,18 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
       }),
       mode: 'no-cors',  // 設定 no-cors 模式
     });
-
     var upload = false;
     while (!upload) {
-        // 顯示上傳中
-        await sleep(1000);
-        await fetchFinishedGrids();
-        var currentGrids = currentFinishedGrids();
-        if (currentGrids.size >= finishedGrids.size) {
-            currentGrids.forEach(grid => finishedGrids.add(grid));
+        const googleGrids = await fetchFinishedGrids();
+        const currentGrids = currentFinishedGrids();
+        if (googleGrids.finishedGrids && googleGrids.finishedGrids.length > currentGrids.size) {
+            googleGrids.finishedGrids.forEach(grid => finishedGrids.add(grid));
             showLoading(false);
-            await showCustomPopup(`照片上傳成功`, false); // 結束上傳中
+            const cell = document.querySelector(`[data-id="${gridId}"]`);
+            cell.classList.add('finish');
+            showCustomPopup(`照片上傳成功`, false);
             upload = true;
+            refreshCanSelectPath();
         }
     }
   };
@@ -189,12 +226,19 @@ async function fetchFinishedGrids() {
     redirect: 'follow'
   });
   const result = await response.json();
-  if (result.success) {
-    result.finishedGrids.forEach((gridId) => {
-      const cell = document.querySelector(`[data-id="${gridId}"]`);
-      if (cell) cell.classList.add('finish');
-    });
-  }
+  showLoading(false);
+  return result;
+}
+
+// 取得最後選取路線
+async function fetchFinishedPath() {
+  showLoading(true);
+  const teamId = localStorage.getItem('teamId');
+  const response = await fetch(`${API_BASE_URL}?action=getFinishedPath&teamId=${teamId}`, {
+    method: 'GET',
+    redirect: 'follow'
+  });
+  const result = await response.json();
   showLoading(false);
   return result;
 }
