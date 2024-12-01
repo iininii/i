@@ -1,5 +1,5 @@
 // 部署作業 ID: AKfycbxxxxxx Web 應用程式 URL: https://script.google.com/macros/s/AKfycbxxxxxx/exec
-const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzBWeqs8om6nZAIZxdKemSVOFxSfxk851xze851h0mSJqJ0OOfF4Td8r-CtM6ZTI-F7_w/exec";
+const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwo6sk3YhgMB_kpuiFXM5sBCvjJvk3K_IDoMrUaOJh7EZmOQAopWKa511_IC2YfgEnDxg/exec";
 
 // 預設九宮格 ID 和中文名稱
 const gridData = [
@@ -49,30 +49,26 @@ loginBtn.addEventListener('click', () => {
   }
 });
 
-// 提交線路點擊事件
-submitLineBtn.addEventListener('click', async () => {
-  const selectedCells = Array.from(grid.querySelectorAll('.finish'));
-  const lineIds = selectedCells.map((cell) => cell.dataset.id);
-  if (!lineIds.length) {
-    showCustomPopup(`請選擇一條線路`, false); 
-    return;
-  }
-  const response = await fetch(API_BASE_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      action: 'submitLine',
-      teamId,
-      teamName,
-      lineIds,
-    }),
-  });
-  const result = await response.json();
-  if (result.success) {
-    selectedCells.forEach((cell) => cell.classList.add('select'));
-    showCustomPopup(`線路送出成功，快去找關主吧`, false); 
-  }
-});
+
+function submitPath(){
+    showLoading(true);
+    const selectedRadio = document.querySelector('input[name="line-answer"]:checked');
+    if (!selectedRadio) {
+        showLoading(false);
+        showCustomPopup(`請選擇路線`, false);
+    }
+    const pathId = selectedRadio.id;
+    const teamId = localStorage.getItem('teamId');
+    fetch(`${API_BASE_URL}?action=updatePath&teamId=${teamId}&pathId=${pathId}`, {
+      method: 'GET',
+      redirect: 'follow'
+    })
+    .then((result) => {
+        showLoading(false)
+        selectedRadio.classList.add('active');
+        showCustomPopup(`線路送出成功，快去找關主吧`, false);
+    });
+}
 
 // 檢查是否已登入
 function checkLogin() {
