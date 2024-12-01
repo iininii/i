@@ -1,0 +1,5 @@
+- [Demo page](https://iininii.github.io/i/2024bingo/index.html)
+- [Apps script](https://script.google.com/home/projects/1_f4P1_0BQB1ZdMY5JGpA9DymW3x6GVtXjp2bgjTpcVNfrHD4Z-ohao77/edit?hl=zh-tw)
+- [Image storage](https://drive.google.com/drive/u/0/folders/1UabeRgUA6e1etMxHL3rB828Hrp5Fj_Vj)
+- [Google Sheets](https://docs.google.com/spreadsheets/d/1OjXrrDGFxvXYhSm2KIke75PynrnUNsfhAz1fbbZ_3Aw/edit?gid=0#gid=0)
+- [Git repo](https://github.com/iininii/i)

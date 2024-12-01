@@ -146,9 +146,8 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
     const base64String = event.target.result.split(',')[1]; // 獲取 Base64 字串
     const fileType = file.type;
     const fileName = file.name;
-
-    // 傳送到 Google Apps Script
-    const response = await fetch(API_BASE_URL, {
+    showLoading(true);
+    const response = await fetch(API_BASE_URL, { // 傳送到 Google Apps Script
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -172,6 +171,7 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
         var currentGrids = currentFinishedGrids();
         if (currentGrids.size >= finishedGrids.size) {
             currentGrids.forEach(grid => finishedGrids.add(grid));
+            showLoading(false);
             await showCustomPopup(`照片上傳成功`, false); // 結束上傳中
             upload = true;
         }
@@ -182,6 +182,7 @@ async function uploadPhotoToDrive(file, gridId, gridName) {
 
 // 獲取後端已完成的格子
 async function fetchFinishedGrids() {
+  showLoading(true);
   const teamId = localStorage.getItem('teamId');
   const response = await fetch(`${API_BASE_URL}?action=getFinished&teamId=${teamId}`, {
     method: 'GET',
@@ -194,6 +195,7 @@ async function fetchFinishedGrids() {
       if (cell) cell.classList.add('finish');
     });
   }
+  showLoading(false);
   return result;
 }
 
@@ -267,5 +269,14 @@ function showCustomPopup(message, showCancel = true) {
       popup.style.display = 'none';  // 隱藏模態框
       resolve(false);  // 回傳取消結果
     };
+  });
+}
+
+// 顯示Loading時不可操作
+function showLoading(show) {
+  return new Promise((resolve, reject) => {
+    const popup = document.getElementById('popup-loading');
+    const display = show ? 'block' : '';
+    popup.style.display = display;
   });
 }
