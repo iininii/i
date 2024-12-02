@@ -261,22 +261,30 @@ function sleep(ms) {
 // 點擊按鈕取得關主位置的URL
 function getBossLocationUrl() {
   document.getElementById('fetch-location-btn').addEventListener('click', async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}?action=getBossLocation`);
-      const data = await response.json();
 
-      console.log(data);
+    // 在用戶點擊事件中預先打開一個空窗口
+    const newTab = window.open('', '_blank');
 
-      if (data.success) {
-        // 開啟位置 URL
-        window.open(data.url, '_blank');
-      } else {
-        alert('無法取得關主位置: ' + data.message);
-      }
-    } catch (error) {
-      console.error('無法取得關主位置:', error);
-      showCustomPopup(`發生錯誤，請稍後再試！`, false); 
-    }
+    fetch(`${API_BASE_URL}?action=getBossLocation`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+
+          if (data.success) {
+            // 在成功後將新窗口的 URL 更新為實際地址
+            newTab.location.href = data.url;
+          } else {
+            // 如果出現錯誤，關閉窗口並提示用戶
+            newTab.close();
+            alert('無法取得關主位置: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('無法取得關主位置:', error);
+          // 如果出現錯誤，關閉窗口並提示用戶
+          newTab.close();
+          alert('發生錯誤，請稍後再試！');
+        });
   });
 }
 getBossLocationUrl()
