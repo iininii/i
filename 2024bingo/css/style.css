@@ -752,3 +752,56 @@ textarea:focus {
 
 
 
+/*------------- loading --------------*/
+.preloader {
+  position: fixed;
+  z-index: 999999999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #F6B859;
+}
+.preloader .preloader-inner {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+.preloader .spinner-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.preloader .spinner {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #897958;
+  border-top-color: #FDF2A0;
+  border-radius: 50%;
+  animation: loader-rotate 1s linear infinite;
+  margin: auto;
+}
+.preloader .preloader-text {
+  color:  #fff;
+  margin: auto;
+  text-align: center;
+  padding: 0 10%;
+}
+.preloader img { 
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 30%;
+}
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0); }
+  100% {
+    transform: rotate(360deg); } 
+}
