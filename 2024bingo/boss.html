@@ -15,15 +15,15 @@
         <div class="preloader-inner">
             <div class="spinner-wrap">
                 <div class="spinner"></div>
-                <img src="images/img_star.webp">    
-            </div>   
+                <img src="images/img_star.webp">
+            </div>
         </div>
-    </div> 
+    </div>
 
     <div id="boss-container">
         <div id="set-time">
             <h2>請先讓團隊填寫編號和名稱後，再點擊開始計時</h2>
-            <button id="time-btn" class="time-btn" alt="開始計時" onclick="showWinnerForm()"></button>
+            <button id="time-btn" class="time-btn" alt="開始計時" onclick="gameStart()"></button>
         </div>
         <div id="countdown">倒數：1:59:59</div>
         <div id="winner-form">
@@ -67,18 +67,5 @@
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/boss.js?v=5"></script>
-    <script>
-        function showWinnerForm() {
-          document.getElementById('set-time').style.display = 'none';
-          document.getElementById('countdown').style.display = 'flex';
-          document.getElementById('winner-form').style.display = 'flex';
-        }
-
-
-        $(window).on('load', function (e) {
-            // delete preloader
-            $(".preloader").fadeOut(300);
-        });
-    </script>
 </body>
 </html>

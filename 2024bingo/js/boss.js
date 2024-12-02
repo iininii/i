@@ -1,13 +1,55 @@
 // Google Apps Script Web App 的 URL
-const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwo6sk3YhgMB_kpuiFXM5sBCvjJvk3K_IDoMrUaOJh7EZmOQAopWKa511_IC2YfgEnDxg/exec";
+const API_BASE_URL = "https://script.google.com/macros/s/AKfycbyxwWSSmXaKnKZTyysP0baJMxsLKDHAakL3zdET8q6c1HFww4qtkA4y4YFgwiyWGfVq5g/exec";
 
 // 初始化
 init();
 
 function init() {
-    fetchTeamPaths().then(result => {
-
+    getStartTime().then(result => {
+        if (result.startTime) {
+            document.getElementById('set-time').style.display = 'none';
+            document.getElementById('countdown').style.display = 'flex';
+            document.getElementById('winner-form').style.display = 'flex';
+        }
     })
+//    fetchTeamPaths().then(result => {
+//
+//    })
+}
+
+async function gameStart() {
+    showLoading(true);
+    const response = await fetch(`${API_BASE_URL}?action=gameStart`, {
+      method: 'GET',
+      redirect: 'follow'
+    });
+    const result = await response.json();
+    showLoading(false);
+    return result;
+}
+
+async function getStartTime() {
+    showLoading(true);
+    const response = await fetch(`${API_BASE_URL}?action=getStartTime`, {
+      method: 'GET',
+      redirect: 'follow'
+    });
+    const result = await response.json();
+    showLoading(false);
+    return result;
+}
+
+
+// 獲取後端已完成的格子
+async function fetchStartTime() {
+    showLoading(true);
+    const response = await fetch(`${API_BASE_URL}?action=getStartTime`, {
+      method: 'GET',
+      redirect: 'follow'
+    });
+    const result = await response.json();
+    showLoading(false);
+    return result;
 }
 
 // 獲取後端已完成的格子
@@ -52,6 +94,15 @@ function showCustomPopup(message, showCancel = true) {
       popup.style.display = 'none';  // 隱藏模態框
       resolve(false);  // 回傳取消結果
     };
+  });
+}
+
+// 顯示Loading時不可操作
+function showLoading(show) {
+  return new Promise((resolve, reject) => {
+    const popup = document.getElementById('popup-loading');
+    const display = show ? 'block' : '';
+    popup.style.display = display;
   });
 }
 
