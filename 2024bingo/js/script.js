@@ -1,5 +1,5 @@
 // 部署作業 ID: AKfycbxxxxxx Web 應用程式 URL: https://script.google.com/macros/s/AKfycbxxxxxx/exec
-const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzyUa1GueXId-Gb8FtIvztd_Wy8sxSgY_bjNLaA68m16tIXZ_CT9Xlq2Kuolh7rZN9fZQ/exec";
+const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzhDxIeeuXoFf5fJ3BoLLUT_-L_kNkx03IWKnSBCZFIUsFGsYwA4LCnhEngzxyKY0wOlg/exec";
 
 // 預設九宮格 ID 和中文名稱
 const gridData = [

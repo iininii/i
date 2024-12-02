@@ -1,5 +1,5 @@
 // Google Apps Script Web App 的 URL
-const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzyUa1GueXId-Gb8FtIvztd_Wy8sxSgY_bjNLaA68m16tIXZ_CT9Xlq2Kuolh7rZN9fZQ/exec";
+const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzhDxIeeuXoFf5fJ3BoLLUT_-L_kNkx03IWKnSBCZFIUsFGsYwA4LCnhEngzxyKY0wOlg/exec";
 
 // 初始化
 init();
