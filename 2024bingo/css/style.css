@@ -31,11 +31,6 @@ body {
   padding-bottom: 100px;
 }
 
-.title {
-  width: 30vh;
-  margin: 5vw 0 2em;
-}
-
 #game-bottom {
   width: 100%;
   display: flex;
@@ -82,11 +77,30 @@ body {
 
 /*------------ 卡片區域 START -------------*/
 /*------------ 卡片區域 START -------------*/
+#game-container #countdown {
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  background-color: #ff4d4d;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #game-area {
+  padding-top: 40px;
   display: none;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+#game-area .title {
+  width: 200px;
+  margin: 5vw 0 2em;
 }
 .team-info {
   font-size: 1rem;
@@ -366,7 +380,7 @@ body {
 }
 #start-area .title {
   width: 90%;
-  margin-top: -5em;
+  margin: -5em 0 2em;
 }
 .start-btn {
   background: url('../images/btn_start.webp') no-repeat center center;
@@ -421,12 +435,12 @@ body {
   align-items: center;
   padding: 3em 2em;
 }
-#countdown {
-  font-size: 25px;
+#boss-container #countdown {
+  font-size: 22px;
   color: #fff;
   text-align: center;
   background-color: #ff4d4d;
-  height: 60px;
+  height: 40px;
   position: absolute;
   left: 0;
   right: 0;
@@ -439,7 +453,7 @@ body {
   display: none;
   flex-direction: column;
   align-items: center;
-  padding: 60px 2em 3em;
+  padding: 40px 2em 3em;
 }
 #set-time h2,
 #winner-form h2,
@@ -587,6 +601,58 @@ body {
   margin-left: 1em;
   text-align: left;
   font-size: 4.5vw;
+}
+
+.popup-rank .popup-content {
+  background-color: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.popup-rank .bg {
+  width: 100%;
+}
+.popup-rank .rank-text {
+  position: absolute;
+  width: 90%;
+  height: 50%;
+  left: 5%;
+  top: 29%;
+  padding: 1em;
+  font-size: 16px;
+  font-weight: bold;
+  overflow: auto;
+}
+.popup-rank .rank-text ol {
+  list-style-type: none;
+}
+.popup-rank .rank-text li {
+  text-align: left;
+  font-size: 22px;
+  background: rgba(255,255,255,0.35);
+  margin-bottom: 10px;
+  padding: 0.5em;
+  border-radius: 8px;
+}
+.popup-rank .rank-text li b {
+  font-weight: bold;
+  background: rgb(245 200 41);
+  padding: 0.2em 0.8em;
+  margin-right: 0.3em;
+  font-size: 16px;
+  border-radius: 3px;
+}
+.popup-rank .rank-text li:nth-child(1) {
+  background-color: #fff6e9;
+}
+.popup-rank .rank-empty {
+  font-size: 20px;
+  color: #c7903c;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-loading {
