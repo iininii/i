@@ -188,7 +188,8 @@ body {
   position: absolute;
   z-index: 2;
 }
-.line-item.active+label {
+.line-item.active+label,
+.line-item:checked.active+label {
   background-color: #9B1E24;
   border: 1px solid #ec5960;
   z-index: 4;
@@ -410,7 +411,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 2em;
+  padding: 3em 2em;
 }
 #winner-form h2,
 #winner-result h2 {
@@ -446,19 +447,19 @@ body {
   background-color: rgb(243 232 219 / 80%);
   border-radius: 10px;
   margin-bottom: 1em;
-  padding: 1em 2em;
-  border: 10px solid transparent;
+  padding: 0.5em 2em;
+  border: 8px solid transparent;
 }
 .team-line-item+label p {
   font-weight: bold;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
 }
 .team-line-item+label img {
-  width: 100px;
+  width: 80px;
 }
 .team-line-item:checked+label {
-  border: 10px solid #d87508;
+  border: 8px solid #d87508;
 }
 /*------------ Boss END -------------*/
 /*------------ Boss END -------------*/
@@ -554,13 +555,17 @@ body {
   background: transparent;
 }
 .popup-loading .popup-content {
-  color: #fff;
-  font-size: 20px;
-  background: rgb(202 128 0);
+  color: #ffe4ba;
+  font-size: 18px;
+  background: rgb(74 50 7 / 75%);
   width: auto;
-  padding: 1em 3em;
-  border-radius: 10px;
-  font-weight: bold;
+  padding: 0.5em 1.5em;
+  border-radius: 5px;
+  display: inline-flex;
+}
+.popup-loading img {
+  width: 30px;
+  margin-right: 10px;
 }
 
 .popup-comfirm .popup-content {
