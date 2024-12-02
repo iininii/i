@@ -25,6 +25,8 @@ const teamInfo = document.getElementById('team-info');
 const grid = document.getElementById('grid');
 const loginBtn = document.getElementById('login-btn');
 const submitLineBtn = document.getElementById('submit-line-btn');
+const rulePopup = document.getElementById('popup-rule');
+const startBtn = document.getElementById('start-btn');
 
 // 初始化檢查
 checkLogin();
@@ -39,17 +41,30 @@ loginBtn.addEventListener('click', () => {
     localStorage.setItem('teamId', teamId);
     localStorage.setItem('teamName', teamName);
 
-    // 顯示遊戲區域
+    // 顯示等待遊戲區域
     loginArea.style.display = 'none';
-    gameArea.style.display = 'flex';
+    startArea.style.display = 'flex';
     teamInfo.textContent = `${teamName}`;
-    initGrid();
   } else {
     showCustomPopup(`請填寫完整資訊`, false); 
   }
 });
 
+// 開始遊戲按鈕點擊事件
+startBtn.addEventListener('click', () => {
+  const gameStart = true;
 
+  if (gameStart) {
+    // 顯示遊戲區域
+    startArea.style.display = 'none';
+    gameArea.style.display = 'flex';
+    initGrid();
+  } else {
+    showCustomPopup(`請等待關主開始計時遊戲`, false); 
+  }
+});
+
+// 提交線路
 function submitPath(){
     showLoading(true);
     const selectedRadio = document.querySelector('input[name="line-answer"]:checked');
@@ -64,16 +79,12 @@ function submitPath(){
       redirect: 'follow'
     })
     .then((result) => {
-        const previousPath = document.querySelector('input[type="radio"].line-item.active');
-        if (previousPath) {
-            previousPath.classList.remove('active');
-        }
+        showLoading(false)
         selectedRadio.classList.add('active');
+        showCustomPopup(`線路送出成功，快去找關主吧`, false);
         document.getElementById('line').classList.add('viewonly');
         document.getElementById('edit-line-btn').style.display = 'block';
         document.getElementById('action-line').style.display = 'none';
-        showLoading(false)
-        showCustomPopup(`線路送出成功，快去找關主吧`, false);
     });
 }
 
@@ -84,6 +95,7 @@ function checkLogin() {
 
   if (storedTeamId && storedTeamName) {
     // 如果有已儲存的資訊，直接顯示遊戲區域
+    rulePopup.style.display = 'none';
     startArea.style.display = 'none';
     loginArea.style.display = 'none';
     gameArea.style.display = 'flex';
