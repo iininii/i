@@ -6,11 +6,20 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
     <div id="game-container">
 
+        <!-- 登入區域 -->
+        <div id="login-area">
+            <h2>輸入團隊資訊</h2>
+            <input type="text" id="team-id" placeholder="團隊編號(請詢問關主)" required />
+            <input type="text" id="team-name" placeholder="自訂團隊名稱" required />
+            <button id="login-btn" class="login-btn"></button>
+        </div>
+
+        <!-- 等待開始區域 -->
         <div id="start-area">
             <img src="images/title.webp" class="title">
 
@@ -21,7 +30,7 @@
                 </div>
             </div>
 
-            <button id="start-btn" class="start-btn" onclick="showLogin()"></button>
+            <button id="start-btn" class="start-btn"></button>
 
             <div class="carousel">
                 <div class="carousel-images fromLeft">
@@ -29,14 +38,6 @@
                     <img src="images/img_meq.webp" alt="">
                 </div>
             </div>
-        </div>
-
-        <!-- 登入區域 -->
-        <div id="login-area">
-            <h2>輸入團隊資訊</h2>
-            <input type="text" id="team-id" placeholder="輸入團隊 ID" required />
-            <input type="text" id="team-name" placeholder="輸入團隊名稱" required />
-            <button id="login-btn" class="login-btn"></button>
         </div>
 
         <!-- 遊戲區域 -->
@@ -71,15 +72,18 @@
                 <button id="cancel-line-btn" class="cancel-line-btn" alt="取消" onclick="hideLine()"></button>
                 <button id="submit-line-btn" class="submit-line-btn" alt="確定線路" onclick="submitPath()"></button>
             </div>
+
+            <div id="game-bottom">
+                <button id="rule-btn" class="rule-btn" alt="規則"></button>  
+                <button id="rank-btn" class="rank-btn" alt="排名"></button>  
+                <button id="fetch-location-btn" class="fetch-location-btn" alt="關主位置"></button>  
+            </div>
         </div>
     </div>
-    <div id="game-bottom">
-        <button id="rule-btn" class="rule-btn" alt="規則"></button>  
-        <button id="fetch-location-btn" class="fetch-location-btn" alt="關主位置"></button>  
-    </div>
+    
 
     <!-- 規則彈窗 -->
-    <div class="popup popup-rule" id="popup-rule">
+    <div class="popup popup-rule" id="popup-rule" style="display:block">
         <div class="popup-content">
             <div class="rule-text">
                 <ol>
@@ -114,13 +118,8 @@
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/script.js?v=5"></script>
+    <script src="js/script.js?v=6"></script>
     <script>
-        function showLogin() {
-          document.getElementById('start-area').style.display = 'none';
-          document.getElementById('popup-rule').style.display = 'block';
-          document.getElementById('login-area').style.display = 'flex';
-        }
         function showLine() {
           document.getElementById('line').classList.remove('viewonly');
           document.getElementById('edit-line-btn').style.display = 'none';

@@ -6,12 +6,17 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
     <div id="boss-container">
+        <div id="set-time">
+            <h2>請先讓團隊填寫編號和名稱後，再點擊開始計時</h2>
+            <button id="time-btn" class="time-btn" alt="開始計時" onclick="showWinnerForm()"></button>
+        </div>
+        <div id="countdown">倒數：1:59:59</div>
         <div id="winner-form">
-            <h2>選擇獲勝隊伍</h2>
+            <h2>請確認團隊來找關主檢查，完成後再點擊送出</h2>
             <div class="select-win-team">
                 <input type="radio" name="team-answer" class="team-line-item" id="1">
                 <label for="1"><p>花生花生花生花生花生花生花生花生花生花生隊👍</p><img src="images/h1.webp" alt=""></label>
@@ -22,7 +27,7 @@
                 <input type="radio" name="team-answer" class="team-line-item" id="3">
                 <label for="3"><p>海豚隊👍</p><img src="images/v1.webp" alt=""></label>
             </div>
-            <button id="winner-comfirm-btn" class="winner-btn"  onclick=showCustomPopup(`確認要送出獲勝退伍？`)></button>
+            <button id="winner-comfirm-btn" class="winner-btn" alt="設為完成"></button>
         </div>
 
         <div id="winner-result" style="display: none"> <!-- 輸入獲勝後，就隱藏#winner-form 並顯示#winner-result -->
@@ -36,12 +41,25 @@
             <div class="msg" id="popup-message"></div>
             <div class="button-box">
                 <button id="popup-cancel-btn" class="cancel-btn" alt="取消"></button>
-                <button id="popup-confirm-btn" class="comfirm-btn" alt="確定"></button>
+                <button id="popup-confirm-btn" class="comfirm-btn" alt="確定"></button>    
             </div>
         </div>
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/boss.js?v=3"></script>
+    <script src="js/boss.js?v=4"></script>
+    <script>
+        function showWinnerForm() {
+          document.getElementById('set-time').style.display = 'none';
+          document.getElementById('countdown').style.display = 'flex';
+          document.getElementById('winner-form').style.display = 'flex';
+        }
+
+
+        $(window).on('load', function (e) {
+            // delete preloader
+            $(".preloader").fadeOut(300);
+        });
+    </script>
 </body>
 </html>
