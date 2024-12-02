@@ -94,41 +94,40 @@ function submitPath(){
 
 // 檢查是否已登入
 function checkLogin() {
-  const storedTeamId = localStorage.getItem('teamId');
-  const storedTeamName = localStorage.getItem('teamName');
-
-  if (storedTeamId && storedTeamName) {
-    // 如果有已儲存的資訊，直接顯示遊戲區域
-    rulePopup.style.display = 'none';
-    startArea.style.display = 'none';
-    loginArea.style.display = 'none';
-    gameArea.style.display = 'flex';
-    teamInfo.textContent = `${storedTeamName}`;
-    initGrid();
-    // 從伺服器獲取已完成的格子並更新可選擇路線
-    fetchFinishedGrids().then(result => {
-        if (result.finishedGrids) {
-            result.finishedGrids.forEach(gridId => {
-                finishedGrids.add(gridId);
-                const cell = document.querySelector(`[data-id="${gridId}"]`);
-                cell.classList.add('finish');
-            });
-            refreshCanSelectPath();
-        }
-    });
-    fetchFinishedPath().then(result => {
-        if (result.finishedPath) {
-            const path = document.getElementById(result.finishedPath);
-            path.classList.add('active');
-        }
-    })
+    const storedTeamId = localStorage.getItem('teamId');
+    const storedTeamName = localStorage.getItem('teamName');
+    if (storedTeamId && storedTeamName) {
+        // 如果有已儲存的資訊，直接顯示遊戲區域
+        rulePopup.style.display = 'none';
+        startArea.style.display = 'none';
+        loginArea.style.display = 'none';
+        gameArea.style.display = 'flex';
+        teamInfo.textContent = `${storedTeamName}`;
+        initGrid();
+        // 從伺服器獲取已完成的格子並更新可選擇路線
+        fetchFinishedGrids().then(result => {
+            if (result.finishedGrids) {
+                result.finishedGrids.forEach(gridId => {
+                    finishedGrids.add(gridId);
+                    const cell = document.querySelector(`[data-id="${gridId}"]`);
+                    cell.classList.add('finish');
+                });
+                refreshCanSelectPath();
+            }
+        });
+        fetchFinishedPath().then(result => {
+            if (result.finishedPath) {
+                const path = document.getElementById(result.finishedPath);
+                path.classList.add('active');
+            }
+        })
+    }
     getStartTime().then(result => {
-        if (!result.startTime) {
-            return;
-        }
-        dateCountdown(result.startTime);
+      if (!result.startTime) {
+          return;
+      }
+      dateCountdown(result.startTime);
     })
-  }
 }
 
 function refreshCanSelectPath() {
