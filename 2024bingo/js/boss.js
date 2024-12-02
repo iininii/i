@@ -1,31 +1,26 @@
 // Google Apps Script Web App 的 URL
-const API_BASE_URL = "https://script.google.com/macros/s/AKfycbynD2nnJBEv_yXxZEcoZjDl7AcTxmyXLIT-NbFqFH3_dBQ_G4a6uJ1L3OquJX7f4o-2WQ/exec";
+const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwo6sk3YhgMB_kpuiFXM5sBCvjJvk3K_IDoMrUaOJh7EZmOQAopWKa511_IC2YfgEnDxg/exec";
 
-///////////////// 設置獲勝團隊 START /////////////////
+// 初始化
+init();
 
-document.getElementById('winner-comfirm-btn').addEventListener('click', async () => {
-  const confirmed = await showCustomPopup(`確認要送出獲勝退伍？`);
-  if (!confirmed) return;
-});
+function init() {
+    fetchTeamPaths().then(result => {
 
+    })
+}
 
-// function setWinner(teamId, line) {
-//   fetch(`${API_BASE_URL}?action=setWinner`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({ teamId, line })
-//   })
-//     .then(response => response.json())
-//     .then(data => {
-//       if (data.status === 'success') {
-//         showCustomPopup(`獲勝團隊已設定！`, false); 
-//       } else {
-//         alert(data.message);
-//       }
-//     });
-// }
-
-///////////////// 設置獲勝團隊 END /////////////////
+// 獲取後端已完成的格子
+async function fetchTeamPaths() {
+  showLoading(true);
+  const response = await fetch(`${API_BASE_URL}?action=getTeamPaths`, {
+    method: 'GET',
+    redirect: 'follow'
+  });
+  const result = await response.json();
+  showLoading(false);
+  return result;
+}
 
 // 顯示模態框
 function showCustomPopup(message, showCancel = true) {

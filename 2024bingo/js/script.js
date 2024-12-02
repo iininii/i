@@ -79,12 +79,16 @@ function submitPath(){
       redirect: 'follow'
     })
     .then((result) => {
-        showLoading(false)
+        const previousPath = document.querySelector('input[type="radio"].line-item.active');
+        if (previousPath) {
+            previousPath.classList.remove('active');
+        }
         selectedRadio.classList.add('active');
-        showCustomPopup(`線路送出成功，快去找關主吧`, false);
         document.getElementById('line').classList.add('viewonly');
         document.getElementById('edit-line-btn').style.display = 'block';
         document.getElementById('action-line').style.display = 'none';
+        showLoading(false)
+        showCustomPopup(`線路送出成功，快去找關主吧`, false);
     });
 }
 

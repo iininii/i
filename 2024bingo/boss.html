@@ -22,7 +22,7 @@
                 <input type="radio" name="team-answer" class="team-line-item" id="3">
                 <label for="3"><p>海豚隊👍</p><img src="images/v1.webp" alt=""></label>
             </div>
-            <button id="winner-comfirm-btn" class="winner-btn"></button>
+            <button id="winner-comfirm-btn" class="winner-btn"  onclick=showCustomPopup(`確認要送出獲勝退伍？`)></button>
         </div>
 
         <div id="winner-result" style="display: none"> <!-- 輸入獲勝後，就隱藏#winner-form 並顯示#winner-result -->
@@ -36,7 +36,7 @@
             <div class="msg" id="popup-message"></div>
             <div class="button-box">
                 <button id="popup-cancel-btn" class="cancel-btn" alt="取消"></button>
-                <button id="popup-confirm-btn" class="comfirm-btn" alt="確定"></button>    
+                <button id="popup-confirm-btn" class="comfirm-btn" alt="確定"></button>
             </div>
         </div>
     </div>
