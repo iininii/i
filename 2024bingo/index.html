@@ -6,9 +6,20 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css?v=6">
+    <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
+
+    <!-- PRELOADER -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="spinner-wrap">
+                <div class="spinner"></div>
+                <img src="images/img_star.webp">    
+            </div>   
+        </div>
+    </div> 
+    
     <div id="game-container">
 
         <!-- 登入區域 -->
@@ -43,6 +54,7 @@
         <!-- 遊戲區域 -->
         <div id="game-area">
             <img src="images/title.webp" class="title">
+            <div id="countdown">倒數：1:59:59</div>
             <h2 id="team-info" class="team-info"></h2>
             <div id="grid-box">
                 <div id="grid"></div> 
@@ -98,6 +110,23 @@
         </div>
     </div>
 
+    <!-- 排名彈窗 -->
+    <div class="popup popup-rank" id="popup-rank">
+        <div class="popup-content">
+            <div class="rank-text">
+                <ol>
+                    <li><b>第1名</b> 青蛙組</li>
+                    <li><b>第2名</b> 花生組</li>
+                    <li><b>第3名</b> 草莓最強</li>
+                    <li><b>第4名</b> JSCD隊</li>
+                    <li><b>第5名</b> 歐歐</li>
+                </ol>
+                <div class="rank-empty">還沒有團隊完成哦</div>
+            </div>
+            <img src="images/bg_rank.webp" class="bg">
+        </div>
+    </div>
+
     <!-- 確認彈窗 -->
     <div class="popup popup-comfirm" id="popup-comfirm">
         <div class="popup-content">
@@ -118,7 +147,7 @@
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/script.js?v=6"></script>
+    <script src="js/script.js?v=7"></script>
     <script>
         function showLine() {
           document.getElementById('line').classList.remove('viewonly');
@@ -138,8 +167,12 @@
               $('.popup-rule').fadeIn();
             });
 
+            $(".rank-btn").on('click', function(event) {
+              $('.popup-rank').fadeIn();
+            });
+
             /*-------- 其他功能 --------*/
-            $(".pop-close, .popup-rule").on('click', function(event) {
+            $(".pop-close, .popup-rule, .popup-rank").on('click', function(event) {
                 $(".popup").fadeOut();
             });
 

@@ -6,9 +6,20 @@
     content="minimal-ui,width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
+
+    <!-- PRELOADER -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="spinner-wrap">
+                <div class="spinner"></div>
+                <img src="images/img_star.webp">    
+            </div>   
+        </div>
+    </div> 
+
     <div id="boss-container">
         <div id="set-time">
             <h2>請先讓團隊填寫編號和名稱後，再點擊開始計時</h2>
@@ -46,8 +57,16 @@
         </div>
     </div>
 
+    <!-- Loading時不可操作 -->
+    <div class="popup popup-loading" id="popup-loading">
+        <div class="popup-content">
+            <img src="images/loading.svg" alt="">
+            Loading...
+        </div>
+    </div>
+
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/boss.js?v=4"></script>
+    <script src="js/boss.js?v=5"></script>
     <script>
         function showWinnerForm() {
           document.getElementById('set-time').style.display = 'none';
