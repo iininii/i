@@ -13,7 +13,7 @@ function init() {
 
         })
         gamingPage();
-        dateCountdown(result.startTime)
+        dateCountdown(result.startTime);
     })
 }
 
@@ -91,7 +91,7 @@ function dateCountdown(time) {
         // 顯示倒數計時`
         document.getElementById("countdown").innerHTML = "倒數 " + hours + "小時 " + minutes + "分 " + seconds + "秒";
     }, 1000);
-};
+}
 
 // Helper function to parse date string in 'yyyy/MM/dd HH:mm:ss' format
 function parseDate(dateString) {

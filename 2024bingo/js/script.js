@@ -122,6 +122,12 @@ function checkLogin() {
             path.classList.add('active');
         }
     })
+    getStartTime().then(result => {
+        if (!result.startTime) {
+            return;
+        }
+        dateCountdown(result.startTime);
+    })
   }
 }
 
@@ -262,6 +268,17 @@ async function fetchFinishedPath() {
   return result;
 }
 
+async function getStartTime() {
+    showLoading(true);
+    const response = await fetch(`${API_BASE_URL}?action=getStartTime`, {
+      method: 'GET',
+      redirect: 'follow'
+    });
+    const result = await response.json();
+    showLoading(false);
+    return result;
+}
+
 // 獲取畫面當前完成格子
 function currentFinishedGrids() {
     const grids = new Set();
@@ -350,4 +367,23 @@ function showLoading(show) {
     const display = show ? 'block' : '';
     popup.style.display = display;
   });
+}
+
+function dateCountdown(time) {
+    // 設定 GMT+8 時區的目標日期（用本地時間模擬 GMT+8）
+    const endTime = new Date(time).getTime() + 2.5 * 3600000; // adding two hours
+
+    // 每秒更新倒數
+    const countdownTimer = setInterval(function() {
+        const now = new Date().getTime(); // 獲取當前 UTC 時間戳
+        const distance = endTime - now;
+
+        // 計算天數、時數、分鐘數和秒數
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // 顯示倒數計時`
+        document.getElementById("countdown").innerHTML = "倒數 " + hours + "小時 " + minutes + "分 " + seconds + "秒";
+    }, 1000);
 }
