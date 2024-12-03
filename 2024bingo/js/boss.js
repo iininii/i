@@ -1,27 +1,51 @@
 import { API_BASE_URL } from './common.js';
-import { dateCountdown, showCustomPopup, showLoading } from './common.js';
+import {
+    fetchRank,
+    fetchGameOver,
+    dateCountdown,
+    showCustomPopup,
+    showLoading
+} from './common.js';
+
+const rankBtn = document.getElementById('rank-btn');
 
 window.clickGameStart = clickGameStart;
 window.submitTeam = submitTeam;
+var stopCountdown;
 
 // 初始化
 init();
 
+// 顯示排名按鈕點擊事件
+rankBtn.addEventListener('click', () => {
+    fetchRank().then(result => {
+        var olElement = document.querySelector("#popup-rank .rank-text ol");
+        olElement.innerHTML = "";
+        if (result.rank) {
+            for (var i = 0; i < result.rank.length; i++) {
+                const li = document.createElement("li");
+                li.innerHTML = "<b>第" + (i + 1) + "名</b> " + result.rank[i];
+                olElement.appendChild(li);
+            }
+        }
+    })
+})
+
 function init() {
-    getStartTime().then(result => {
+    stopCountdown = getStartTime().then(result => {
         if (!result.startTime) {
             initPage();
             return;
         }
         refreshTeamPaths();
         gamingPage();
-        dateCountdown(result.startTime);
+        return dateCountdown(result.startTime);
     })
 }
 
 function clickGameStart() {
     gameStart().then(result => {
-        gamingPage();
+        init();
     })
 }
 
@@ -101,9 +125,19 @@ async function submitTeam() {
       redirect: 'follow'
     });
     const result = await response.json();
+    const gameOver = fetchGameOver().then(result => {
+        if (result.gameOver) {
+            stopCountdown();
+            document.getElementById("countdown").innerHTML = "遊戲結束";
+            return showCustomPopup(`遊戲結束！`, false).then(result => true);
+        }
+        return false
+    })
     refreshTeamPaths();
     showLoading(false);
-    showCustomPopup(`提交成功`, false);
+    if (!gameOver) {
+        showCustomPopup(`提交成功`, false);
+    }
     return result;
 }
 

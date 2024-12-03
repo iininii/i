@@ -13,6 +13,18 @@
     <script>
         $(window).on('load', function (e) {
             $(".preloader").fadeOut(300);
+
+            $(".rule-btn").on('click', function(event) {
+              $('.popup-rule').fadeIn();
+            });
+
+            $(".rank-btn").on('click', function(event) {
+              $('.popup-rank').fadeIn();
+            });
+            $(".popup-rank").on('click', function(event) {
+                $(".popup").fadeOut();
+            });
+
         });
     </script>
 </head>
@@ -42,9 +54,19 @@
             </div>
             <button id="winner-comfirm-btn" class="winner-btn" alt="設為完成" onclick="submitTeam()"></button>
         </div>
+        <div id="game-bottom">
+            <button id="rank-btn" class="rank-btn" alt="排名"></button>
+        </div>
+    </div>
 
-        <div id="winner-result" style="display: none"> <!-- 輸入獲勝後，就隱藏#winner-form 並顯示#winner-result -->
-            <h2>獲勝隊伍：第 1 組 - 花生隊👍</h2>
+    <!-- 排名彈窗 -->
+    <div class="popup popup-rank" id="popup-rank">
+        <div class="popup-content">
+            <div class="rank-text">
+                <ol>
+                </ol>
+            </div>
+            <img src="images/bg_rank.webp" class="bg">
         </div>
     </div>
 
