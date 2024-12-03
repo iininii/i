@@ -1,9 +1,20 @@
-export const API_BASE_URL = "https://script.google.com/macros/s/AKfycbw0ikAmjdYQpXGua8k0FJqO9cy6v8SSNNqFOLk7j34tqniLkWJcUDQmUHNSFCkdUm65Gw/exec";
+export const API_BASE_URL = "https://script.google.com/macros/s/AKfycbx92gpyRzMLjWUdF0q7e9G7YKALFl3HR26JnktoSUwB6lBAFj0AhKC3L2aA0OiqMpIDTw/exec";
 
 // 獲取排名
 export async function fetchRank() {
   showLoading(true);
   const response = await fetch(`${API_BASE_URL}?action=getRank`, {
+    method: 'GET',
+    redirect: 'follow'
+  });
+  const result = await response.json();
+  showLoading(false);
+  return result;
+}
+
+export async function fetchGameOver() {
+  showLoading(true);
+  const response = await fetch(`${API_BASE_URL}?action=getGameOver`, {
     method: 'GET',
     redirect: 'follow'
   });
