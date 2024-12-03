@@ -1,6 +1,8 @@
 import { API_BASE_URL } from './common.js';
 import {
     fetchRank,
+    fetchGameOver,
+    checkGameOver,
     dateCountdown,
     showCustomPopup,
     showLoading
@@ -23,6 +25,7 @@ const gridData = [
 
 // 已完成的九宮格 ID
 const finishedGrids = new Set();
+const gameOver = false;
 
 // 選取 DOM 元素
 const startArea = document.getElementById('start-area');
@@ -90,6 +93,12 @@ rankBtn.addEventListener('click', () => {
 // 提交線路
 function submitPath() {
     showLoading(true);
+    gameOver = fetchGameOver().then(result => {
+        if (result.gameOver) {
+            showCustomPopup(`遊戲結束！`, false);
+        }
+        return result.gameOver;
+    })
     const selectedRadio = document.querySelector('input[name="line-answer"]:checked');
     if (!selectedRadio) {
         showLoading(false);
@@ -151,7 +160,8 @@ function init() {
       if (!result.startTime) {
           return;
       }
-      dateCountdown(result.startTime);
+      const stopCountdown = dateCountdown(result.startTime);
+      checkGameOver(stopCountdown);
     });
 }
 

@@ -13,13 +13,11 @@ export async function fetchRank() {
 }
 
 export async function fetchGameOver() {
-  showLoading(true);
   const response = await fetch(`${API_BASE_URL}?action=getGameOver`, {
     method: 'GET',
     redirect: 'follow'
   });
   const result = await response.json();
-  showLoading(false);
   return result;
 }
 
@@ -35,8 +33,24 @@ export function dateCountdown(time) {
             document.getElementById("countdown").innerHTML = "倒數 " + hours + "小時 " + minutes + "分 " + seconds + "秒";
         } else {
             document.getElementById("countdown").innerHTML = "遊戲結束";
+            clearInterval(countdownTimer);
         }
     }, 1000);
+    return () => clearInterval(countdownTimer);
+}
+
+export function checkGameOver(stopCountdown) {
+    const intervalId = setInterval(function () {
+        fetchGameOver().then(result => {
+            if (result.gameOver) {
+                clearInterval(intervalId); // Correct way to stop the interval
+                document.getElementById("countdown").innerHTML = "遊戲結束";
+                document.getElementById("edit-line-btn").style.display = "none";
+                stopCountdown();
+                showCustomPopup(`遊戲結束！`, false);
+            }
+        });
+    }, 1000 * 5);
 }
 
 // 顯示模態框
