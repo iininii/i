@@ -69,7 +69,7 @@ startBtn.addEventListener('click', () => {
     // 顯示遊戲區域
     startArea.style.display = 'none';
     gameArea.style.display = 'flex';
-    initGrid();
+    init();
   } else {
     showCustomPopup(`請等待關主開始計時遊戲`, false); 
   }
@@ -93,11 +93,10 @@ rankBtn.addEventListener('click', () => {
 // 提交線路
 function submitPath() {
     showLoading(true);
-    gameOver = fetchGameOver().then(result => {
+    fetchGameOver().then(result => {
         if (result.gameOver) {
-            showCustomPopup(`遊戲結束！`, false);
+            showCustomPopup(`遊戲已經結束！`, false);
         }
-        return result.gameOver;
     })
     const selectedRadio = document.querySelector('input[name="line-answer"]:checked');
     if (!selectedRadio) {
