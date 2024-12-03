@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwl-HcBVupPSIdoPuK0gS8_m4kT10lOmRiaWviv3ZZY06nV3TNB8MaEFty69Ua7gf80AQ/exec";
+export const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzzjVCuUhtV3O_V-q8YRl3fyqaljOThgwImMOjXEVcCqJHYqwmVvslKMjzpuVfYVMf9SQ/exec";
 
 export function dateCountdown(time) {
     const endTime = new Date(time).getTime() + 2.5 * 3600000; // adding two hours

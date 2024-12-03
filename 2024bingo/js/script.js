@@ -29,6 +29,7 @@ const loginBtn = document.getElementById('login-btn');
 const submitLineBtn = document.getElementById('submit-line-btn');
 const rulePopup = document.getElementById('popup-rule');
 const startBtn = document.getElementById('start-btn');
+const rankBtn = document.getElementById('rank-btn');
 
 // 初始化檢查
 init();
@@ -65,6 +66,21 @@ startBtn.addEventListener('click', () => {
     showCustomPopup(`請等待關主開始計時遊戲`, false); 
   }
 });
+
+// 顯示排名按鈕點擊事件
+rankBtn.addEventListener('click', () => {
+    fetchRank().then(result => {
+        var olElement = document.querySelector("#popup-rank .rank-text ol");
+        olElement.innerHTML = "";
+        if (result.rank) {
+            for (var i = 0; i < result.rank.length; i++) {
+                const li = document.createElement("li");
+                li.innerHTML = "<b>第" + (i + 1) + "名</b> " + result.rank[i];
+                olElement.appendChild(li);
+            }
+        }
+    })
+})
 
 // 提交線路
 function submitPath() {
@@ -263,6 +279,18 @@ async function fetchFinishedPath() {
   showLoading(true);
   const teamId = localStorage.getItem('teamId');
   const response = await fetch(`${API_BASE_URL}?action=getFinishedPath&teamId=${teamId}`, {
+    method: 'GET',
+    redirect: 'follow'
+  });
+  const result = await response.json();
+  showLoading(false);
+  return result;
+}
+
+// 獲取後端已完成的格子
+async function fetchRank() {
+  showLoading(true);
+  const response = await fetch(`${API_BASE_URL}?action=getRank`, {
     method: 'GET',
     redirect: 'follow'
   });
