@@ -11,7 +11,6 @@ const rankBtn = document.getElementById('rank-btn');
 
 window.clickGameStart = clickGameStart;
 window.submitTeam = submitTeam;
-var stopCountdown;
 
 // 初始化
 init();
@@ -32,7 +31,7 @@ rankBtn.addEventListener('click', () => {
 })
 
 function init() {
-    stopCountdown = getStartTime().then(result => {
+    getStartTime().then(result => {
         if (!result.startTime) {
             initPage();
             return;
