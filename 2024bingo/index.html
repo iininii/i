@@ -7,6 +7,45 @@
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css?v=7">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="module" src="js/common.js?v=5"></script>
+    <script type="module" src="js/script.js?v=7"></script>
+    <script>
+        function showLine() {
+          document.getElementById('line').classList.remove('viewonly');
+          document.getElementById('edit-line-btn').style.display = 'none';
+          document.getElementById('action-line').style.display = 'flex';
+        }
+        function hideLine() {
+          document.getElementById('line').classList.add('viewonly');
+          document.getElementById('edit-line-btn').style.display = 'block';
+          document.getElementById('action-line').style.display = 'none';
+        }
+
+
+        jQuery(function($) {
+
+            $(".rule-btn").on('click', function(event) {
+              $('.popup-rule').fadeIn();
+            });
+
+            $(".rank-btn").on('click', function(event) {
+              $('.popup-rank').fadeIn();
+            });
+
+            /*-------- 其他功能 --------*/
+            $(".pop-close, .popup-rule, .popup-rank").on('click', function(event) {
+                $(".popup").fadeOut();
+            });
+
+        });
+
+
+        $(window).on('load', function (e) {
+            // delete preloader
+            $(".preloader").fadeOut(300);
+        });
+    </script>
 </head>
 <body>
 
@@ -145,44 +184,5 @@
             Loading...
         </div>
     </div>
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/script.js?v=7"></script>
-    <script>
-        function showLine() {
-          document.getElementById('line').classList.remove('viewonly');
-          document.getElementById('edit-line-btn').style.display = 'none';
-          document.getElementById('action-line').style.display = 'flex';
-        }
-        function hideLine() {
-          document.getElementById('line').classList.add('viewonly');
-          document.getElementById('edit-line-btn').style.display = 'block';
-          document.getElementById('action-line').style.display = 'none';
-        }
-
-
-        jQuery(function($) {
-
-            $(".rule-btn").on('click', function(event) {
-              $('.popup-rule').fadeIn();
-            });
-
-            $(".rank-btn").on('click', function(event) {
-              $('.popup-rank').fadeIn();
-            });
-
-            /*-------- 其他功能 --------*/
-            $(".pop-close, .popup-rule, .popup-rank").on('click', function(event) {
-                $(".popup").fadeOut();
-            });
-
-        });
-
-
-        $(window).on('load', function (e) {
-            // delete preloader
-            $(".preloader").fadeOut(300);
-        });
-    </script>
 </body>
 </html>
