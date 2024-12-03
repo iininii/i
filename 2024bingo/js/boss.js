@@ -85,30 +85,29 @@ async function fetchStartTime() {
 
 // 獲取後端已完成的格子
 async function fetchTeamPaths() {
+  showLoading(true);
   const response = await fetch(`${API_BASE_URL}?action=getTeamPaths`, {
     method: 'GET',
     redirect: 'follow'
   });
   const result = await response.json();
+  showLoading(false);
   return result;
 }
 
 function dateCountdown(time) {
-    // 設定 GMT+8 時區的目標日期（用本地時間模擬 GMT+8）
     const endTime = new Date(time).getTime() + 2.5 * 3600000; // adding two hours
-
-    // 每秒更新倒數
     const countdownTimer = setInterval(function() {
-        const now = new Date().getTime(); // 獲取當前 UTC 時間戳
+        const now = new Date().getTime();
         const distance = endTime - now;
-
-        // 計算天數、時數、分鐘數和秒數
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // 顯示倒數計時`
-        document.getElementById("countdown").innerHTML = "倒數 " + hours + "小時 " + minutes + "分 " + seconds + "秒";
+        if (distance >= 0) {
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = "倒數 " + hours + "小時 " + minutes + "分 " + seconds + "秒";
+        } else {
+            document.getElementById("countdown").innerHTML = "遊戲結束";
+        }
     }, 1000);
 }
 
