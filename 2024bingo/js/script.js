@@ -76,7 +76,8 @@ function submitPath() {
     }
     const pathId = selectedRadio.id;
     const teamId = localStorage.getItem('teamId');
-    fetch(`${API_BASE_URL}?action=updatePath&teamId=${teamId}&pathId=${pathId}`, {
+    const teamName = localStorage.getItem('teamName');
+    fetch(`${API_BASE_URL}?action=updatePath&teamId=${teamId}&teamName=${teamName}&pathId=${pathId}`, {
       method: 'GET',
       redirect: 'follow'
     })

@@ -7,6 +7,14 @@
     <title>食字路口-風城美食獵人</title>
     <link rel="shortcut icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css?v=5">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="module" src="js/boss.js?v=5"></script>
+    <script type="module" src="js/common.js?v=5"></script>
+    <script>
+        $(window).on('load', function (e) {
+            $(".preloader").fadeOut(300);
+        });
+    </script>
 </head>
 <body>
 
@@ -29,16 +37,10 @@
         <div id="winner-form">
             <h2>請確認團隊來找關主檢查，完成後再點擊送出</h2>
             <div class="select-win-team" id="path-radio-div">
-<!--                <input type="radio" name="team-answer" class="team-line-item" id="1">-->
-<!--                <label for="1"><p>花生花生花生花生花生花生花生花生花生花生隊👍</p><img src="images/h1.webp" alt=""></label>-->
-
-<!--                <input type="radio" name="team-answer" class="team-line-item" id="2">-->
-<!--                <label for="2"><p>青蛙隊👍</p><img src="images/s1.webp" alt=""></label>-->
-
 <!--                <input type="radio" name="team-answer" class="team-line-item" id="3">-->
 <!--                <label for="3"><p>海豚隊👍</p><img src="images/v1.webp" alt=""></label>-->
             </div>
-            <button id="winner-comfirm-btn" class="winner-btn" alt="設為完成"></button>
+            <button id="winner-comfirm-btn" class="winner-btn" alt="設為完成" onclick="submitTeam()"></button>
         </div>
 
         <div id="winner-result" style="display: none"> <!-- 輸入獲勝後，就隱藏#winner-form 並顯示#winner-result -->
@@ -64,14 +66,5 @@
             Loading...
         </div>
     </div>
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="module" src="js/boss.js?v=5"></script>
-    <script type="module" src="js/common.js?v=5"></script>
-    <script>
-        $(window).on('load', function (e) {
-            $(".preloader").fadeOut(300);
-        });
-    </script>
 </body>
 </html>

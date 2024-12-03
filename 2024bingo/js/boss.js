@@ -2,6 +2,7 @@ import { API_BASE_URL } from './common.js';
 import { dateCountdown, showCustomPopup, showLoading } from './common.js';
 
 window.clickGameStart = clickGameStart;
+window.submitTeam = submitTeam;
 
 // 初始化
 init();
@@ -77,6 +78,28 @@ async function getStartTime() {
     return result;
 }
 
+async function submitTeam() {
+    showLoading(true);
+    const selectedRadio = document.querySelector('input[name="team-answer"]:checked');
+    if (!selectedRadio) {
+        showLoading(false);
+        showCustomPopup(`請選擇隊伍`, false);
+    }
+    const teamId = selectedRadio.id;
+    const teamName = document.querySelector(`label[for="${teamId}"] p`).textContent;
+    const imgElement = document.querySelector(`label[for="${teamId}"] img`);
+    const src = imgElement.getAttribute('src');
+    const imgFile = src.split('/').pop(); // Get the file name (v1.webp)
+    const path = imgFile.split('.')[0]; // Get the base name (v1)
+    const response = await fetch(`${API_BASE_URL}?action=submitTeam&teamId=${teamId}&teamName=${teamName}&path=${path}`, {
+      method: 'GET',
+      redirect: 'follow'
+    });
+    const result = await response.json();
+    showLoading(false);
+    showCustomPopup(`提交成功`, false);
+    return result;
+}
 
 // 獲取後端已完成的格子
 async function fetchStartTime() {
