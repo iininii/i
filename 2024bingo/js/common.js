@@ -1,5 +1,17 @@
 export const API_BASE_URL = "https://script.google.com/macros/s/AKfycbw0ikAmjdYQpXGua8k0FJqO9cy6v8SSNNqFOLk7j34tqniLkWJcUDQmUHNSFCkdUm65Gw/exec";
 
+// 獲取排名
+export async function fetchRank() {
+  showLoading(true);
+  const response = await fetch(`${API_BASE_URL}?action=getRank`, {
+    method: 'GET',
+    redirect: 'follow'
+  });
+  const result = await response.json();
+  showLoading(false);
+  return result;
+}
+
 export function dateCountdown(time) {
     const endTime = new Date(time).getTime() + 2.5 * 3600000; // adding two hours
     const countdownTimer = setInterval(function() {

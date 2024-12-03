@@ -1,5 +1,10 @@
 import { API_BASE_URL } from './common.js';
-import { dateCountdown, showCustomPopup, showLoading } from './common.js';
+import {
+    fetchRank,
+    dateCountdown,
+    showCustomPopup,
+    showLoading
+} from './common.js';
 
 window.submitPath = submitPath;
 
@@ -279,18 +284,6 @@ async function fetchFinishedPath() {
   showLoading(true);
   const teamId = localStorage.getItem('teamId');
   const response = await fetch(`${API_BASE_URL}?action=getFinishedPath&teamId=${teamId}`, {
-    method: 'GET',
-    redirect: 'follow'
-  });
-  const result = await response.json();
-  showLoading(false);
-  return result;
-}
-
-// 獲取後端已完成的格子
-async function fetchRank() {
-  showLoading(true);
-  const response = await fetch(`${API_BASE_URL}?action=getRank`, {
     method: 'GET',
     redirect: 'follow'
   });
