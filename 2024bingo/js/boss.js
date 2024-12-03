@@ -7,6 +7,7 @@ init();
 function init() {
     getStartTime().then(result => {
         if (!result.startTime) {
+            initPage();
             return;
         }
         fetchTeamPaths().then(result => {
@@ -40,6 +41,10 @@ function clickGameStart() {
     gameStart().then(result => {
         gamingPage();
     })
+}
+
+function initPage() {
+    document.getElementById('set-time').removeAttribute('style');
 }
 
 function gamingPage() {
