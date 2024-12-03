@@ -31,7 +31,7 @@ const rulePopup = document.getElementById('popup-rule');
 const startBtn = document.getElementById('start-btn');
 
 // 初始化檢查
-checkLogin();
+init();
 
 // 登入按鈕點擊事件
 loginBtn.addEventListener('click', () => {
@@ -96,7 +96,7 @@ function submitPath() {
 }
 
 // 檢查是否已登入
-function checkLogin() {
+function init() {
     const storedTeamId = localStorage.getItem('teamId');
     const storedTeamName = localStorage.getItem('teamName');
     if (storedTeamId && storedTeamName) {
@@ -123,14 +123,15 @@ function checkLogin() {
                 const path = document.getElementById(result.finishedPath);
                 path.classList.add('active');
             }
-        })
+        });
     }
+    initBossLocation();
     getStartTime().then(result => {
       if (!result.startTime) {
           return;
       }
       dateCountdown(result.startTime);
-    })
+    });
 }
 
 function refreshCanSelectPath() {
@@ -298,7 +299,7 @@ function sleep(ms) {
 
 
 // 點擊按鈕取得關主位置的URL
-function getBossLocationUrl() {
+function initBossLocation() {
   document.getElementById('fetch-location-btn').addEventListener('click', async () => {
 
     // 在用戶點擊事件中預先打開一個空窗口
@@ -326,4 +327,3 @@ function getBossLocationUrl() {
         });
   });
 }
-getBossLocationUrl()
