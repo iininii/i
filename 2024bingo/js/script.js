@@ -135,7 +135,7 @@ function init() {
                 loginArea.style.display = 'none';
                 startArea.style.display = 'flex';
                 teamInfo.textContent = `${teamName}`;
-                showCustomPopup(`請先等待關主開始計時${result.startTime}`, false);
+                showCustomPopup(`請先等待關主開始計時`, false);
                 return;
             }
         });
