@@ -7,6 +7,8 @@ import {
     showLoading
 } from './common.js';
 
+var stopCountdown;
+
 const rankBtn = document.getElementById('rank-btn');
 
 window.clickGameStart = clickGameStart;
@@ -38,7 +40,7 @@ function init() {
         }
         refreshTeamPaths();
         gamingPage();
-        return dateCountdown(result.startTime);
+        stopCountdown =  dateCountdown(result.startTime);
     })
 }
 
