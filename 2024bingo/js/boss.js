@@ -126,19 +126,16 @@ async function submitTeam() {
       redirect: 'follow'
     });
     const result = await response.json();
-    const gameOver = fetchGameOver().then(result => {
-        if (result.gameOver) {
-            stopCountdown();
-            document.getElementById("countdown").innerHTML = "遊戲結束";
-            return showCustomPopup(`遊戲結束！`, false).then(result => true);
-        }
-        return false
-    })
     refreshTeamPaths();
-    showLoading(false);
-    if (!gameOver) {
+    const gameOver = await fetchGameOver().then(result => result.gameOver);
+    if (gameOver) {
+        stopCountdown();
+        document.getElementById("countdown").innerHTML = "遊戲結束";
+        showCustomPopup(`遊戲結束！`, false);
+    } else {
         showCustomPopup(`提交成功`, false);
     }
+    showLoading(false);
     return result;
 }
 
