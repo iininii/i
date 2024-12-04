@@ -44,34 +44,35 @@ init();
 
 // 登入按鈕點擊事件
 loginBtn.addEventListener('click', () => {
-  const teamId = document.getElementById('team-id').value;
-  const teamName = document.getElementById('team-name').value;
+    const teamId = document.getElementById('team-id').value;
+    const teamName = document.getElementById('team-name').value;
 
-  if (teamId && teamName) {
-    // 儲存至 localStorage
-    localStorage.setItem('teamId', teamId);
-    localStorage.setItem('teamName', teamName);
+    if (teamId && teamName) {
+      // 儲存至 localStorage
+      localStorage.setItem('teamId', teamId);
+      localStorage.setItem('teamName', teamName);
 
-    // 顯示等待遊戲區域
-    loginArea.style.display = 'none';
-    startArea.style.display = 'flex';
-    teamInfo.textContent = `${teamName}`;
-  } else {
-    showCustomPopup(`請填寫完整資訊`, false); 
-  }
+      // 顯示等待遊戲區域
+      loginArea.style.display = 'none';
+      startArea.style.display = 'flex';
+      teamInfo.textContent = `${teamName}`;
+    } else {
+      showCustomPopup(`請填寫完整資訊`, false);
+    }
 });
 
 // 開始遊戲按鈕點擊事件
-startBtn.addEventListener('click', async () => {
-  const startTime = await getStartTime().then(result => result.startTime)
-  if (startTime) {
-    // 顯示遊戲區域
-    startArea.style.display = 'none';
-    gameArea.style.display = 'flex';
-    init();
-  } else {
-    showCustomPopup('請先等待關主開始計時', false);
-  }
+startBtn.addEventListener('click', () => {
+    getStartTime().then(result => {
+        if (result.startTime) {
+            // 顯示遊戲區域
+            startArea.style.display = 'none';
+            gameArea.style.display = 'flex';
+            init();
+        } else {
+            showCustomPopup('請先等待關主開始計時', false);
+        }
+    })
 });
 
 // 顯示排名按鈕點擊事件
@@ -127,17 +128,17 @@ function submitPath() {
 function init() {
     const teamId = localStorage.getItem('teamId');
     const teamName = localStorage.getItem('teamName');
-    let startTime;
-    getStartTime().then(result => {startTime = result.startTime});
     if (teamId && teamName) {
-        if (!startTime) {
-            // 顯示等待遊戲區域
-            loginArea.style.display = 'none';
-            startArea.style.display = 'flex';
-            teamInfo.textContent = `${teamName}`;
-            showCustomPopup('請先等待關主開始計時', false);
-            return
-        }
+        getStartTime().then(result => {
+            if (!result.startTime) {
+                // 顯示等待遊戲區域
+                loginArea.style.display = 'none';
+                startArea.style.display = 'flex';
+                teamInfo.textContent = `${teamName}`;
+                showCustomPopup(`請先等待關主開始計時${result.startTime}`, false);
+                return;
+            }
+        });
         // 如果有已儲存的資訊，直接顯示遊戲區域
         rulePopup.style.display = 'none';
         startArea.style.display = 'none';
