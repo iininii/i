@@ -62,16 +62,15 @@ loginBtn.addEventListener('click', () => {
 });
 
 // 開始遊戲按鈕點擊事件
-startBtn.addEventListener('click', () => {
-  const gameStart = true;
-
-  if (gameStart) {
+startBtn.addEventListener('click', async () => {
+  const startTime = await getStartTime().then(result => result.startTime)
+  if (startTime) {
     // 顯示遊戲區域
     startArea.style.display = 'none';
     gameArea.style.display = 'flex';
     init();
   } else {
-    showCustomPopup(`請等待關主開始計時遊戲`, false); 
+    showCustomPopup('請先等待關主開始計時', false);
   }
 });
 
@@ -126,15 +125,25 @@ function submitPath() {
 
 // 檢查是否已登入
 function init() {
-    const storedTeamId = localStorage.getItem('teamId');
-    const storedTeamName = localStorage.getItem('teamName');
-    if (storedTeamId && storedTeamName) {
+    const teamId = localStorage.getItem('teamId');
+    const teamName = localStorage.getItem('teamName');
+    let startTime;
+    getStartTime().then(result => {startTime = result.startTime});
+    if (teamId && teamName) {
+        if (!startTime) {
+            // 顯示等待遊戲區域
+            loginArea.style.display = 'none';
+            startArea.style.display = 'flex';
+            teamInfo.textContent = `${teamName}`;
+            showCustomPopup('請先等待關主開始計時', false);
+            return
+        }
         // 如果有已儲存的資訊，直接顯示遊戲區域
         rulePopup.style.display = 'none';
         startArea.style.display = 'none';
         loginArea.style.display = 'none';
         gameArea.style.display = 'flex';
-        teamInfo.textContent = `${storedTeamName}`;
+        teamInfo.textContent = `${teamName}`;
         initGrid();
         // 從伺服器獲取已完成的格子並更新可選擇路線
         fetchFinishedGrids().then(result => {
