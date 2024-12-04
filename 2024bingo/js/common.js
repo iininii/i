@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://script.google.com/macros/s/AKfycbx92gpyRzMLjWUdF0q7e9G7YKALFl3HR26JnktoSUwB6lBAFj0AhKC3L2aA0OiqMpIDTw/exec";
+export const API_BASE_URL = "https://script.google.com/macros/s/AKfycbxtycJhOvrfM1HFt2Jshe7r1ASC10IKC6giFNdZIVa0bt3F1KeullT32ku1ysuUx5Z9yg/exec";
 
 // 獲取排名
 export async function fetchRank() {
